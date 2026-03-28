@@ -43,3 +43,10 @@
     height: 48px;
   }
 }
+
+@media (max-width: 480px){
+  .progress-btn svg{
+    top:-1px;
+    left:-1px;
+  }
+}
