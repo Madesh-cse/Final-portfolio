@@ -13,7 +13,7 @@
 }
 
 .contact-wrap {
-  max-width:100%;
+  max-width: 100%;
   background: var(--text);
   padding: 100px 64px;
   display: grid;
@@ -131,6 +131,158 @@
         background: var(--red);
         color: var(--white);
       }
+    }
+  }
+.contact-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🔥 MODAL CARD (WHITE) */
+.contact-modal {
+  width: 100%;
+  max-width: 440px;
+  padding: 32px;
+  border-radius: 18px;
+  background: #ffffff; /* ✅ changed to WHITE */
+  color: var(--text);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  animation: modalFade 0.3s ease;
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.contact-modal h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.contact-modal input,
+.contact-modal textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+  background: #fafafa;
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.25s ease;
+
+  &::placeholder {
+    color: #9a9a9a;
+  }
+
+  &:focus {
+    border-color: var(--text);
+    background: #ffffff;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.contact-modal textarea {
+  height: 120px;
+  resize: none;
+}
+
+.contact-modal button {
+  margin-top: 8px;
+  padding: 13px;
+  border-radius: 10px;
+  border: none;
+  background: var(--text);
+  color: var(--white);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--red);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.contact-close-btn {
+  position: absolute;
+  top: 0;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #ffffff; /* ✅ WHITE */
+  color: var(--text);
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: var(--text);
+    color: var(--white);
+    transform: rotate(90deg) scale(1.1);
+  }
+}
+
+/* 🔥 STATUS MESSAGE */
+.status-msg {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 4px;
+  color: #666;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 480px) {
+  .contact-modal {
+    width: 90%;
+    padding: 24px;
+  }
+
+  .contact-close-btn {
+    top: 0;
+    right: 10px;
+  }
+}
+
+  /* 📱 MOBILE */
+  @media (max-width: 480px) {
+    .modal {
+      width: 90%;
+      padding: 24px;
     }
   }
 }
