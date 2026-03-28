@@ -1,0 +1,137 @@
+:root {
+  --white: #ffffff;
+  --off-white: #fafaf8;
+  --paper: #f5f3ee;
+  --border: #e8e4dc;
+  --border-soft: #f0ede6;
+
+  --text: #1a1916;
+  --text-secondary: #6b6760;
+  --text-light: #a8a49c;
+
+  --red: #c0392b;
+}
+
+.marquee-strip {
+  .marquee-container {
+    max-width: 100%;
+    overflow: hidden;
+    background: var(--paper);
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    padding: 18px 0;
+    position: relative;
+
+    /* 🔥 Fade edges (premium look) */
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 80px;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    &::before {
+      left: 0;
+      background: linear-gradient(to right, var(--paper), transparent);
+    }
+
+    &::after {
+      right: 0;
+      background: linear-gradient(to left, var(--paper), transparent);
+    }
+  }
+}
+
+/* ===================== */
+/* 🧠 MARQUEE INNER */
+/* ===================== */
+
+.marquee-inner {
+  display: flex;
+  gap: 28px;
+  white-space: nowrap;
+
+  /* 🔥 smoother + slower */
+  animation: marquee 25s linear infinite;
+
+  /* 🔥 pause on hover */
+  &:hover {
+    animation-play-state: paused;
+  }
+
+  span {
+    font-size: 14px;
+    color: var(--text-secondary);
+    letter-spacing: 0.08em;
+    transition: all 0.3s ease;
+
+    /* subtle float */
+    animation: floatY 3s ease-in-out infinite;
+  }
+
+  /* stagger float effect */
+  span:nth-child(odd) {
+    animation-delay: 0.5s;
+  }
+
+  span:nth-child(even) {
+    animation-delay: 1s;
+  }
+
+  /* accent styling */
+  .accent {
+    color: var(--text);
+    font-weight: 600;
+
+    &:hover {
+      color: var(--red);
+      transform: translateY(-2px) scale(1.05);
+    }
+  }
+}
+
+/* ===================== */
+/* 🎬 ANIMATIONS */
+/* ===================== */
+
+/* horizontal scroll */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* vertical subtle motion */
+@keyframes floatY {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* ===================== */
+/* 📱 RESPONSIVE */
+/* ===================== */
+
+@media (max-width: 768px) {
+  .marquee-inner {
+    gap: 20px;
+    animation-duration: 18s; // faster on mobile
+  }
+
+  .marquee-inner span {
+    font-size: 12px;
+  }
+}

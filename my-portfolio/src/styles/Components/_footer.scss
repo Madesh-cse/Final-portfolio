@@ -1,0 +1,99 @@
+:root {
+  --white: #ffffff;
+  --off-white: #fafaf8;
+  --paper: #f5f3ee;
+  --border: #e8e4dc;
+  --border-soft: #f0ede6;
+
+  --text: #1a1916;
+  --text-secondary: #6b6760;
+  --text-light: #a8a49c;
+
+  --red: #c0392b;
+}
+
+.footer {
+  padding: 32px 64px;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: var(--off-white);
+  animation: fadeUp 0.8s ease;
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 300;
+    transition: color 0.3s;
+
+    &:hover {
+      color: var(--text-secondary);
+    }
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+
+    li {
+      overflow: hidden;
+    }
+
+    a {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      position: relative;
+      display: inline-block;
+      transition: all 0.25s ease;
+      &:hover {
+        color: var(--text);
+        transform: translateY(-2px);
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0%;
+        height: 1px;
+        background: var(--text);
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    gap: 18px;
+    text-align: center;
+
+    .footer-links {
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+}

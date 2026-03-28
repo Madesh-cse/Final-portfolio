@@ -1,0 +1,297 @@
+:root {
+  --white: #ffffff;
+  --off-white: #fafaf8;
+  --paper: #f5f3ee;
+  --border: #e8e4dc;
+  --border-soft: #f0ede6;
+
+  --text: #1a1916;
+  --text-secondary: #6b6760;
+  --text-light: #a8a49c;
+
+  --red: #c0392b;
+}
+
+// * {
+//   outline: 1px solid rgba(0, 128, 0, 0.322);
+// }
+
+.hero {
+  padding: 100px 68px 100px 68px;
+  background: var(--off-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  max-width: 100%;
+}
+
+/* LEFT CONTENT */
+.left {
+  flex: 1;
+  max-width: 600px;
+
+  > * {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  > *:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+  > *:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  > *:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  > *:nth-child(4) {
+    animation-delay: 0.8s;
+  }
+}
+
+/* TEXT */
+.subtitle {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 64px;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.description {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+/* BUTTONS */
+.actions {
+  display: flex;
+  gap: 20px;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  padding: 12px 28px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* PRIMARY */
+.primaryBtn {
+  background: var(--text);
+  color: var(--white);
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background: var(--red);
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+    z-index: -1;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+/* SECONDARY */
+.secondaryBtn {
+  border: 1px solid var(--border);
+  color: var(--text);
+
+  &:hover {
+    border-color: var(--text);
+    transform: translateY(-2px);
+  }
+}
+
+/* RIGHT IMAGE */
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.imageWrapper {
+  width: 395px;
+  height: 480px;
+  overflow: hidden;
+  border-radius: 12px;
+  animation: float 4s ease-in-out infinite;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* ========================= */
+/* 📱 TABLET (<= 900px) */
+/* ========================= */
+
+/* ========================= */
+/* 💻 TABLET (<= 900px) → ROW */
+/* ========================= */
+@media (max-width: 900px) {
+  .hero {
+    width: 100%;
+    min-height: auto;
+    padding: 40px 20px;
+  }
+
+  .hero-container {
+    display: flex;
+    flex-direction: row; /* ✅ KEEP ROW */
+    gap: 20px;
+    align-items: center;
+  }
+
+  .left,
+  .right {
+    flex: 1;
+    max-width: 100%;
+    // border: 1px solid red;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .actions {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .imageWrapper {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .imageWrapper img {
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+    background-size: cover;
+  }
+}
+
+/* ========================= */
+/* 📱 SMALL TABLET (<= 796px) → COLUMN */
+/* ========================= */
+@media (max-width: 796px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .subtitle {
+    margin-top: 30px;
+    display: block;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .right {
+    width: 100%;
+  }
+
+  .imageWrapper {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+  }
+
+  .imageWrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+/* ========================= */
+/* 📱 MOBILE (<= 500px) */
+/* ========================= */
+@media (max-width: 500px) {
+  .hero {
+    width: 100%;
+    padding: 20px 16px;
+  }
+
+  .subtitle {
+    margin-top: 52px;
+    display: block;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .imageWrapper {
+    width: 100%;
+    max-width: 300px;
+  }
+}
