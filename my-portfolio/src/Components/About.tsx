@@ -5,7 +5,6 @@ function About() {
   return (
     <section className="section" id="about">
       <div className="about-layout">
-
         {/* LEFT */}
         <motion.div
           className="about-left"
@@ -53,13 +52,17 @@ function About() {
 
           <ul className="expertise-list">
             {[
-              "Frontend Development (React, TypeScript)",
+              "Frontend Development (React, TypeScript, Next.js)",
               "Backend APIs (Node.js, Express.js)",
+              "Python Development",
               "Database Management (MongoDB, SQL)",
-              "REST API & Authentication",
+              "REST APIs & Authentication",
               "Docker & Containerization",
+              "CI/CD (GitHub Actions)",
+              "AWS Cloud (S3, EC2)",
               "Responsive Web Design",
               "Styling (SCSS / CSS Preprocessor)",
+              ,
             ].map((item, index) => (
               <motion.li
                 key={index}
