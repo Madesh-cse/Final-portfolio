@@ -25,75 +25,100 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ─── NAVBAR ─────────────────────────────── */
-.nav {
+/* ─── HEADER SHELL ───────────────────────── */
+.site-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-soft);
-  padding: 0 64px;
-  height: var(--nav-height);
+}
+
+.site-header__bar {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  height: var(--nav-height);
+  padding: 0 64px;
+
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid var(--border-soft);
+
   transition: height 0.3s ease, padding 0.3s ease;
 }
 
-/* ─── LOGO ───────────────────────────────── */
-.logo {
+/* ─── BRAND ──────────────────────────────── */
+.site-header__brand {
+  flex-shrink: 0;
+
   font-family: "Cormorant Garamond", serif;
   font-size: 20px;
   font-weight: 600;
   color: var(--text);
   text-decoration: none;
   white-space: nowrap;
-  flex-shrink: 0;
 
   sup {
-    font-size: 10px;
-    font-family: "Outfit", sans-serif;
-    color: #a8a49c;
     margin-left: 2px;
+    font-family: "Outfit", sans-serif;
+    font-size: 10px;
+    color: #a8a49c;
   }
 }
 
-/* ─── LINKS (DESKTOP) ────────────────────── */
-.links {
+/* ─── DESKTOP PANEL / MENU ───────────────── */
+.site-header__panel {
   display: flex;
   align-items: center;
   gap: 40px;
-  list-style: none;
+}
+
+.site-header__menu {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+
   margin: 0;
   padding: 0;
+  list-style: none;
+}
 
-  li a {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.25s ease;
-    white-space: nowrap;
+.site-header__menu-link {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
 
-    &:hover {
-      color: var(--text);
-    }
+  transition: color 0.25s ease;
+
+  &:hover {
+    color: var(--text);
   }
 }
 
 /* ─── CTA ────────────────────────────────── */
-.cta {
+.site-header__cta {
   padding: 9px 24px;
+
   background: var(--text);
-  color: var(--white) !important;
-  font-size: 11px !important;
-  letter-spacing: 0.14em !important;
+  color: var(--white);
+
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+
   transition: background 0.25s ease;
 
   &:hover {
@@ -101,138 +126,157 @@ html {
   }
 }
 
-/* ─── HAMBURGER ──────────────────────────── */
-.hamburger {
+/* ─── HAMBURGER TOGGLE ───────────────────── */
+.site-header__toggle {
   display: none;
+
   flex-direction: column;
   justify-content: center;
   gap: 5px;
+
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+
+  border: none;
+  background: transparent;
+
   cursor: pointer;
   z-index: 200;
-  padding: 4px;
   flex-shrink: 0;
+}
 
-  span {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background: var(--text);
-    border-radius: 2px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    transform-origin: center;
-  }
+.site-header__toggle-bar {
+  display: block;
 
-  &.active {
-    span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    span:nth-child(2) {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-    span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-  }
+  width: 24px;
+  height: 2px;
+
+  background: var(--text);
+  border-radius: 2px;
+
+  transform-origin: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.site-header__toggle.is-active .site-header__toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.site-header__toggle.is-active .site-header__toggle-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.site-header__toggle.is-active .site-header__toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ════════════════════════════════════════════
    📐 TABLET  (769px – 1024px)
-   Shrink gaps + padding, keep desktop layout
    ════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .nav {
+  .site-header__bar {
     padding: 0 32px;
   }
 
-  .links {
+  .site-header__menu {
     gap: 24px;
   }
 
-  .cta {
+  .site-header__cta {
     padding: 8px 18px;
   }
 }
 
 /* ════════════════════════════════════════════
    📱 MOBILE  (≤ 768px)
-   Switch to hamburger + slide-in drawer
+   Hamburger + slide-in drawer
    ════════════════════════════════════════════ */
 @media (max-width: 768px) {
   :root {
     --nav-height: 60px;
   }
 
-  .nav {
+  .site-header__bar {
     padding: 0 20px;
   }
 
-  /* Show hamburger */
-  .hamburger {
+  .site-header__toggle {
     display: flex;
   }
 
-  /* Full-screen slide-in drawer */
-  .links {
+  /* Drawer panel — explicit solid/opaque background so nothing behind it
+     can ever read as a black overlay */
+  .site-header__panel {
     position: fixed;
     top: var(--nav-height);
-    right: -100%;          /* hidden off-screen */
+    right: -100%;
+
     width: 100%;
-    height: calc(100dvh - var(--nav-height)); /* dvh = avoids mobile toolbar jump */
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    height: calc(100dvh - var(--nav-height));
+
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 28px;
-    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    background-color: var(--white);
+    background-image: none;
+    opacity: 1;
+
+    z-index: 150;
+
     overflow-y: auto;
 
-    li a {
-      font-size: 15px;
-      letter-spacing: 0.1em;
-    }
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Open state */
-  .links.show {
+  .site-header__panel.is-open {
     right: 0;
   }
 
-  /* Bigger CTA inside drawer */
-  .cta {
+  .site-header__menu {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .site-header__menu-link {
+    font-size: 15px;
+    letter-spacing: 0.1em;
+  }
+
+  .site-header__cta {
     padding: 12px 32px;
-    font-size: 12px !important;
+    font-size: 12px;
   }
 }
 
 /* ════════════════════════════════════════════
    📱 SMALL MOBILE  (≤ 380px)
-   Tiny phones — Galaxy S series, iPhone SE
    ════════════════════════════════════════════ */
 @media (max-width: 380px) {
-  .nav {
+  .site-header__bar {
     padding: 0 14px;
   }
 
-  .logo {
+  .site-header__brand {
     font-size: 17px;
   }
 
-  .hamburger span {
+  .site-header__toggle-bar {
     width: 20px;
   }
 
-  .links {
+  .site-header__menu {
     gap: 22px;
-
-    li a {
-      font-size: 14px;
-    }
   }
 
-  .cta {
+  .site-header__menu-link {
+    font-size: 14px;
+  }
+
+  .site-header__cta {
     padding: 10px 24px;
   }
 }

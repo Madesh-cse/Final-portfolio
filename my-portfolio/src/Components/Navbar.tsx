@@ -1,38 +1,80 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const NAV_LINKS = [
+  { label: "Work", href: "#works" },
+  { label: "About", href: "#about" },
+  { label: "Process", href: "#process" },
+];
 
 function Navbar() {
-  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setOpen(!open);
-    document.body.style.overflow = open ? "auto" : "hidden"; // lock scroll
-  };
+  const closeMenu = () => setMenuOpen(false);
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
+
+  /* Lock body scroll while drawer is open */
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  /* Close on Escape */
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeMenu();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   return (
-    <nav className="nav">
-      <div className="logo">
-        Madesh <sup>©</sup>
-      </div>
-      <div
-        className={`hamburger ${open ? "active" : ""}`}
-        onClick={toggleMenu}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+    <header className="site-header">
+      <nav className="site-header__bar">
+        <a href="#home" className="site-header__brand" onClick={closeMenu}>
+          Madesh <sup>©</sup>
+        </a>
 
-      <ul className={`links ${open ? "show" : ""}`}>
-        <li><a href="#works" onClick={toggleMenu}>Work</a></li>
-        <li><a href="#about" onClick={toggleMenu}>About</a></li>
-        <li><a href="#works" onClick={toggleMenu}>Process</a></li>
-        <li>
-          <a href="#contact" className="cta" onClick={toggleMenu}>
+        <button
+          type="button"
+          className={`site-header__toggle ${menuOpen ? "is-active" : ""}`}
+          onClick={toggleMenu}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+        >
+          <span className="site-header__toggle-bar" />
+          <span className="site-header__toggle-bar" />
+          <span className="site-header__toggle-bar" />
+        </button>
+
+        <div className={`site-header__panel ${menuOpen ? "is-open" : ""}`}>
+          <ul className="site-header__menu">
+            {NAV_LINKS.map((item) => (
+              <li key={item.label} className="site-header__menu-item">
+                <a
+                  href={item.href}
+                  className="site-header__menu-link"
+                  onClick={closeMenu}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#contact"
+            className="site-header__cta"
+            onClick={closeMenu}
+          >
             Hire Me
           </a>
-        </li>
-      </ul>
-    </nav>
+        </div>
+      </nav>
+    </header>
   );
 }
 
