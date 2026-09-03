@@ -1,9 +1,50 @@
-:root {
-  --border: #e0e0e0;
-  --off-white: #f7f7f7;
-  --text: #222;
-  --text-light: #777;
+
+.stats-section {
+  position: relative;
+  padding: 0 68px;
+  background: var(--off-white);
+  overflow: hidden;
 }
+
+/* =========================
+   HEADER
+========================= */
+
+.stats-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.stats-index {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stats-line {
+  height: 1px;
+  flex: 1;
+  background: var(--border);
+}
+
+.stats-caption {
+  font-size: 11px;
+  color: var(--text-light);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* =========================
+   STATS GRID
+========================= */
 
 .stats-row {
   display: grid;
@@ -11,101 +52,227 @@
   border-bottom: 1px solid var(--border);
 }
 
-
 .stat-cell {
-  padding: 52px 48px;
+  position: relative;
+  min-height: 260px;
+  padding: 42px 40px;
   border-right: 1px solid var(--border);
-  transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateY(40px);
-  animation: fadeUp 0.8s ease forwards;
-
-  &:nth-child(1) { animation-delay: 0.2s; }
-  &:nth-child(2) { animation-delay: 0.4s; }
-  &:nth-child(3) { animation-delay: 0.6s; }
-  &:nth-child(4) { animation-delay: 0.8s; }
+  overflow: hidden;
+  cursor: default;
+  transition:
+    background 0.4s ease,
+    transform 0.4s ease;
 
   &:last-child {
     border-right: none;
   }
 
-  /* 🔥 Hover Effect */
-  &:hover {
-    background: var(--off-white);
-    transform: translateY(-6px) scale(1.02);
+  /* Subtle red hover background */
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s ease;
   }
-  .stat-big {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 56px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1;
-    display: block;
-    margin-bottom: 8px;
-    animation: scaleIn 0.6s ease;
 
-    sup {
-      font-size: 24px;
-      vertical-align: super;
+  &:hover {
+    background: var(--paper);
+    transform: translateY(-4px);
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .stat-arrow {
+      color: var(--red);
+      transform: translate(4px, -4px);
+    }
+
+    .stat-big {
+      transform: translateX(4px);
     }
   }
-  .stat-label {
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--text-light);
-    letter-spacing: 0.04em;
-  }
 }
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+/* =========================
+   TOP ROW
+========================= */
+
+.stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 52px;
+}
+
+.stat-number {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  color: var(--text-light);
+  letter-spacing: 0.08em;
+}
+
+.stat-arrow {
+  font-size: 18px;
+  color: var(--text-light);
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* =========================
+   BIG NUMBER
+========================= */
+
+.stat-big {
+  display: block;
+  margin-bottom: 12px;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(52px, 5vw, 78px);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--text);
+
+  transition: transform 0.4s ease;
+
+  sup {
+    position: relative;
+    top: -0.7em;
+    margin-left: 3px;
+
+    font-family: "Cormorant Garamond", serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--red);
   }
 }
 
-@keyframes scaleIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+/* =========================
+   LABEL
+========================= */
+
+.stat-label {
+  max-width: 150px;
+
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-light);
 }
 
-/* ===================== */
-/* 📱 RESPONSIVE */
-/* ===================== */
+/* =========================
+   TABLET
+========================= */
 
 @media (max-width: 1024px) {
+  .stats-section {
+    padding: 0 40px;
+  }
+
   .stats-row {
     grid-template-columns: repeat(2, 1fr);
   }
 
   .stat-cell {
-    padding: 40px 30px;
+    min-height: 220px;
+    padding: 36px 30px;
 
-    .stat-big {
-      font-size: 44px;
+    &:nth-child(2) {
+      border-right: none;
     }
+
+    &:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--border);
+    }
+  }
+
+  .stat-big {
+    font-size: 60px;
   }
 }
 
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 600px) {
+  .stats-section {
+    padding: 0 20px;
+  }
+
+  .stats-header {
+    gap: 12px;
+  }
+
+  .stats-caption {
+    display: none;
+  }
+
   .stats-row {
     grid-template-columns: 1fr;
   }
 
   .stat-cell {
-    padding: 32px 20px;
+    min-height: auto;
+    padding: 30px 24px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
 
-    .stat-big {
-      font-size: 36px;
+    &:last-child {
+      border-bottom: none;
     }
   }
+
+  .stat-top {
+    margin-bottom: 30px;
+  }
+
+  .stat-big {
+    font-size: 56px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
 }
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+  .stats-section {
+    padding: 0 16px;
+  }
+
+  .stat-cell {
+    padding: 26px 20px;
+  }
+
+  .stat-big {
+    font-size: 48px;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-cell,
+  .stat-big,
+  .stat-arrow {
+    transition: none;
+  }
+}
+
