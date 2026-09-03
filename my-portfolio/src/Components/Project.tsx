@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaArrowLeft } from "react-icons/fa6";
-import { FaArrowRight } from "react-icons/fa6";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
 import udemyImg1 from "../assets/udemy-img-1.png";
 import udemyImg2 from "../assets/udemy-img-2.png";
@@ -11,24 +10,24 @@ import udemyImg5 from "../assets/udemy-img-5.png";
 import udemyImg6 from "../assets/udemy-img-6.png";
 import Elearning from "../assets/Video/E-Learning.mp4";
 
-import chatAiImg1 from "../assets/chat-ai-1.jpeg"
-import chatAiImg2 from "../assets/chat-ai-2.jpeg"
-import chatAiImg3 from "../assets/chat-ai-3.jpeg"
-import chatAiImg4 from "../assets/chat-ai-4.jpeg"
-import chatAiImg5 from "../assets/chat-ai-5.jpeg"
-import chatAiImg6 from "../assets/chat-ai-6.jpeg"
-import chatAiImg7 from "../assets/chat-ai-7.jpeg"
-import chatAiImg8 from "../assets/chat-ai-8.jpeg"
-import chatAiImg9 from "../assets/chat-ai-9.jpeg"
-import chatAiImg10 from "../assets/chat-ai-10.jpeg"
-import chatAiImg11 from "../assets/chat-ai-11.jpeg"
-import chatAiImg12 from "../assets/chat-ai-12.jpeg"
-import chatAiImg13 from "../assets/chat-ai-13.jpeg"
-import chatAiImg14 from "../assets/chat-ai-14.jpeg"
-import chatAiImg15 from "../assets/chat-ai-15.jpeg"
-import chatAiImg16 from "../assets/chat-ai-16.jpeg"
+import chatAiImg1 from "../assets/chat-ai-1.jpeg";
+import chatAiImg2 from "../assets/chat-ai-2.jpeg";
+import chatAiImg3 from "../assets/chat-ai-3.jpeg";
+import chatAiImg4 from "../assets/chat-ai-4.jpeg";
+import chatAiImg5 from "../assets/chat-ai-5.jpeg";
+import chatAiImg6 from "../assets/chat-ai-6.jpeg";
+import chatAiImg7 from "../assets/chat-ai-7.jpeg";
+import chatAiImg8 from "../assets/chat-ai-8.jpeg";
+import chatAiImg9 from "../assets/chat-ai-9.jpeg";
+import chatAiImg10 from "../assets/chat-ai-10.jpeg";
+import chatAiImg11 from "../assets/chat-ai-11.jpeg";
+import chatAiImg12 from "../assets/chat-ai-12.jpeg";
+import chatAiImg13 from "../assets/chat-ai-13.jpeg";
+import chatAiImg14 from "../assets/chat-ai-14.jpeg";
+import chatAiImg15 from "../assets/chat-ai-15.jpeg";
+import chatAiImg16 from "../assets/chat-ai-16.jpeg";
 
-// PMS IMG
+// PMS
 import pmsImg1 from "../assets/Screenshot 2026-03-26 071435.png";
 import pmsImg2 from "../assets/Screenshot 2026-03-26 071547.png";
 import pmsImg3 from "../assets/Screenshot 2026-03-26 072158.png";
@@ -40,14 +39,14 @@ import pmsImg8 from "../assets/Screenshot 2026-03-26 072610.png";
 import pmsImg9 from "../assets/Screenshot 2026-03-26 072744.png";
 import pmsVideo from "../assets/Video/PMW.mp4";
 
-//CH IMG
+// Contextual Highlights
 import CH1 from "../assets/CH (1).png";
 import CH2 from "../assets/CH 2.png";
 import CH3 from "../assets/CH 3.png";
 import CH4 from "../assets/CH 4.png";
 import CHVideo from "../assets/Video/Video Project.mp4";
 
-// Food application
+// Food
 import fawImg from "../assets/faw-img-1.png";
 import fawImg1 from "../assets/faw-img-2.png";
 import fawImg2 from "../assets/faw-img-3.png";
@@ -132,18 +131,18 @@ const projects: Project[] = [
       chatAiImg16,
     ],
     video: pmsVideo,
-    github: "https://github.com/yourrepo/ai-project",
+    github: "https://github.com/Madesh-cse/AI-Chat-Assistant-Backend",
     live: "#",
   },
   {
     idx: "03",
-    title: "E-Learning Web App (Udemy-Like Platform)",
-    sub: "Full-stack scalable learning platform",
+    title: "E-Learning Web App",
+    sub: "Udemy-like full-stack learning platform",
     category: "Full Stack",
     year: "2025",
     techStack: ["React", "Node", "MongoDB", "Stripe", "JWT"],
     description: [
-      "Built scalable e-learning platform",
+      "Built a scalable e-learning platform",
       "JWT authentication & role-based access",
       "Stripe payment integration",
       "Optimized backend performance",
@@ -155,14 +154,14 @@ const projects: Project[] = [
   },
   {
     idx: "04",
-    title: "AI Note Taker with Contextual Highlights",
+    title: "AI Note Taker",
     sub: "AI-powered notes + collaboration",
-    category: "AI App",
+    category: "AI Application",
     year: "2025",
     techStack: ["React", "TypeScript", "Node", "MongoDB", "NLP", "WebRTC"],
     description: [
-      "Built AI-powered note-taking system",
-      "Integrated NLP summarization model",
+      "Built an AI-powered note-taking system",
+      "Integrated NLP summarization",
       "Enabled real-time collaboration",
       "Developed scalable backend APIs",
     ],
@@ -179,7 +178,7 @@ const projects: Project[] = [
     year: "2024",
     techStack: ["React", "Redux", "Firebase"],
     description: [
-      "Built responsive food ordering platform",
+      "Built a responsive food ordering platform",
       "Used Redux for state management",
       "Integrated Firebase authentication",
       "Optimized UI performance",
@@ -200,200 +199,396 @@ function Project() {
   const VISIBLE_THUMBS = 4;
 
   useEffect(() => {
-    const esc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedProject(null);
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedProject(null);
+      }
     };
-    window.addEventListener("keydown", esc);
-    return () => window.removeEventListener("keydown", esc);
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = selectedProject ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedProject]);
+
+  const openProject = (project: Project) => {
+    setSelectedProject(project);
+    setActiveImg(0);
+    setActiveTab("demo");
+    setThumbStart(0);
+  };
+
+  const closeProject = () => {
+    setSelectedProject(null);
+    setActiveImg(0);
+    setThumbStart(0);
+  };
+
   const nextThumbs = () => {
-    if (selectedProject) {
-      setThumbStart((prev) =>
-        Math.min(prev + 1, selectedProject.images.length - VISIBLE_THUMBS),
-      );
-    }
+    if (!selectedProject) return;
+
+    const maxStart = Math.max(
+      selectedProject.images.length - VISIBLE_THUMBS,
+      0
+    );
+
+    setThumbStart((prev) => Math.min(prev + 1, maxStart));
   };
 
   const prevThumbs = () => {
     setThumbStart((prev) => Math.max(prev - 1, 0));
   };
 
-  return (
-    <section className="section">
-      <div id="works">
-        <h2 className="section-title">Projects</h2>
-        <div className="works-list">
-          {projects.map((p) => (
-            <motion.div
-              key={p.idx}
-              className="work-row"
-              onClick={() => {
-                setSelectedProject(p);
-                setActiveImg(0);
-                setActiveTab("demo");
-              }}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <div className="work-idx">{p.idx}</div>
+  const selectImage = (index: number) => {
+    setActiveImg(index);
 
-              <div>
-                <div className="work-title">{p.title}</div>
-                <div className="work-sub">{p.sub}</div>
+    if (index < thumbStart) {
+      setThumbStart(index);
+    }
+
+    if (index >= thumbStart + VISIBLE_THUMBS) {
+      setThumbStart(index - VISIBLE_THUMBS + 1);
+    }
+  };
+
+  return (
+    <section className="section projects-section" id="works">
+      {/* =========================
+          SECTION HEADER
+      ========================= */}
+
+      <div className="projects-heading">
+        <div className="projects-eyebrow">
+          <span>05</span>
+          <span className="heading-line" />
+          <span>Selected Work</span>
+        </div>
+
+        <div className="projects-heading-content">
+          <h2 className="section-title">
+            Things I&apos;ve
+            <br />
+            <em>built.</em>
+          </h2>
+
+          <p>
+            A selection of projects exploring full-stack development,
+            artificial intelligence, and thoughtful user experiences.
+          </p>
+        </div>
+      </div>
+
+      {/* =========================
+          PROJECT LIST
+      ========================= */}
+
+      <div className="works-list">
+        {projects.map((project) => (
+          <motion.button
+            key={project.idx}
+            className="work-row"
+            onClick={() => openProject(project)}
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ x: 8 }}
+            transition={{
+              duration: 0.5,
+              ease: "easeOut",
+            }}
+            viewport={{
+              once: true,
+              amount: 0.15,
+            }}
+          >
+            <span className="work-idx">{project.idx}</span>
+
+            <span className="work-main">
+              <span className="work-title">{project.title}</span>
+              <span className="work-sub">{project.sub}</span>
+            </span>
+
+            <span className="work-category">{project.category}</span>
+
+            <span className="work-year">{project.year}</span>
+
+            <span className="work-arrow">↗</span>
+          </motion.button>
+        ))}
+      </div>
+
+      {/* =========================
+          PROJECT MODAL
+      ========================= */}
+
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            className="modal-overlay"
+            onClick={closeProject}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="project-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${selectedProject.title} project details`}
+              onClick={(e) => e.stopPropagation()}
+              initial={{
+                opacity: 0,
+                y: 40,
+                scale: 0.96,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                y: 25,
+                scale: 0.97,
+              }}
+              transition={{
+                duration: 0.35,
+                ease: "easeOut",
+              }}
+            >
+              {/* Close */}
+              <button
+                className="close-btn"
+                onClick={closeProject}
+                aria-label="Close project"
+              >
+                ×
+              </button>
+
+              {/* Project number */}
+              <div className="modal-project-number">
+                Project / {selectedProject.idx}
               </div>
 
-              <div>{p.category}</div>
-              <div>{p.year}</div>
-            </motion.div>
-          ))}
-        </div>
-        <AnimatePresence>
-          {selectedProject && (
-            <>
-              <motion.div
-                className="modal-backdrop"
-                onClick={() => setSelectedProject(null)}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              />
-              <motion.div
-                className="project-modal"
-                initial={{ opacity: 0, scale: 0.9, y: 40 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 40 }}
-                transition={{ duration: 0.4 }}
-              >
+              {/* Tabs */}
+              <div className="modal-tabs">
                 <button
-                  className="close-btn"
-                  onClick={() => setSelectedProject(null)}
+                  className={activeTab === "demo" ? "active" : ""}
+                  onClick={() => setActiveTab("demo")}
                 >
-                  ✕
+                  <span>01</span>
+                  Live Demo
                 </button>
-                <div className="modal-tabs">
-                  <button
-                    className={activeTab === "demo" ? "active" : ""}
-                    onClick={() => setActiveTab("demo")}
+
+                <button
+                  className={activeTab === "images" ? "active" : ""}
+                  onClick={() => setActiveTab("images")}
+                >
+                  <span>02</span>
+                  Screenshots
+                </button>
+              </div>
+
+              {/* Media */}
+              <AnimatePresence mode="wait">
+                {activeTab === "demo" && (
+                  <motion.div
+                    key="demo"
+                    className="video-wrapper"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    Demo
-                  </button>
-                  <button
-                    className={activeTab === "images" ? "active" : ""}
-                    onClick={() => setActiveTab("images")}
+                    <video controls autoPlay muted loop playsInline>
+                      <source
+                        src={selectedProject.video}
+                        type="video/mp4"
+                      />
+                      Your browser does not support video playback.
+                    </video>
+                  </motion.div>
+                )}
+
+                {activeTab === "images" && (
+                  <motion.div
+                    key="images"
+                    className="screenshots-wrapper"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    Screenshots
-                  </button>
-                </div>
-                <AnimatePresence mode="wait">
-                  {activeTab === "demo" && (
-                    <motion.div
-                      key="demo"
-                      className="video-wrapper"
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -30 }}
-                    >
-                      <video controls autoPlay muted loop>
-                        <source src={selectedProject.video} type="video/mp4" />
-                      </video>
-                    </motion.div>
-                  )}
+                    <div className="main-image">
+                      <img
+                        src={selectedProject.images[activeImg]}
+                        alt={`${selectedProject.title} screenshot ${
+                          activeImg + 1
+                        }`}
+                      />
 
-                  {activeTab === "images" && (
-                    <motion.div
-                      key="images"
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -30 }}
-                    >
-                      <div className="main-image">
-                        <img src={selectedProject.images[activeImg]} alt="" />
+                      <div className="image-counter">
+                        {String(activeImg + 1).padStart(2, "0")} /{" "}
+                        {String(selectedProject.images.length).padStart(
+                          2,
+                          "0"
+                        )}
                       </div>
-                      <div className="thumb-carousel">
-                        {/* LEFT BUTTON */}
-                        <button
-                          className="arrow left"
-                          onClick={prevThumbs}
-                          disabled={thumbStart === 0}
-                        >
-                          <FaArrowLeft />
-                        </button>
+                    </div>
 
-                        <div className="thumb-window">
-                          <motion.div
-                            className="thumb-track"
-                            animate={{
-                              x: `-${thumbStart * 110}px`,
-                            }}
-                            transition={{
-                              type: "spring",
-                              stiffness: 120,
-                              damping: 18,
-                            }}
-                          >
-                            {selectedProject.images.map((img, i) => (
-                              <motion.div
-                                key={i}
-                                className={`thumb ${i === activeImg ? "active" : ""}`}
-                                onClick={() => setActiveImg(i)}
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.95 }}
-                              >
-                                <img src={img} />
-                              </motion.div>
-                            ))}
-                          </motion.div>
-                        </div>
-                        <button
-                          className="arrow right"
-                          onClick={nextThumbs}
-                          disabled={
-                            thumbStart >=
-                            selectedProject.images.length - VISIBLE_THUMBS
-                          }
+                    <div className="thumb-carousel">
+                      <button
+                        className="arrow"
+                        onClick={prevThumbs}
+                        disabled={thumbStart === 0}
+                        aria-label="Previous screenshots"
+                      >
+                        <FaArrowLeft />
+                      </button>
+
+                      <div className="thumb-window">
+                        <motion.div
+                          className="thumb-track"
+                          animate={{
+                            x: `-${thumbStart * 120}px`,
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 130,
+                            damping: 20,
+                          }}
                         >
-                          <FaArrowRight />
-                        </button>
+                          {selectedProject.images.map((image, index) => (
+                            <button
+                              key={image}
+                              className={`thumb ${
+                                index === activeImg ? "active" : ""
+                              }`}
+                              onClick={() => selectImage(index)}
+                              aria-label={`View screenshot ${
+                                index + 1
+                              }`}
+                            >
+                              <img
+                                src={image}
+                                alt={`Thumbnail ${index + 1}`}
+                              />
+                            </button>
+                          ))}
+                        </motion.div>
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                  {selectedProject.title}
-                </motion.h3>
 
-                <div className="meta">
-                  {selectedProject.category} • {selectedProject.year}
+                      <button
+                        className="arrow"
+                        onClick={nextThumbs}
+                        disabled={
+                          thumbStart >=
+                          Math.max(
+                            selectedProject.images.length -
+                              VISIBLE_THUMBS,
+                            0
+                          )
+                        }
+                        aria-label="Next screenshots"
+                      >
+                        <FaArrowRight />
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* =========================
+                  PROJECT DETAILS
+              ========================= */}
+
+              <div className="modal-details">
+                <div className="modal-title-row">
+                  <div>
+                    <span className="modal-category">
+                      {selectedProject.category}
+                    </span>
+
+                    <h3>{selectedProject.title}</h3>
+
+                    <p className="modal-subtitle">
+                      {selectedProject.sub}
+                    </p>
+                  </div>
+
+                  <span className="modal-year">
+                    {selectedProject.year}
+                  </span>
                 </div>
 
-                <div className="tech">
-                  {selectedProject.techStack.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
+                {/* Tech */}
+                <div className="tech-section">
+                  <span className="detail-label">Technology</span>
+
+                  <div className="tech">
+                    {selectedProject.techStack.map((technology) => (
+                      <span key={technology}>{technology}</span>
+                    ))}
+                  </div>
                 </div>
 
-                <div className="desc">
-                  {selectedProject.description.map((d, i) => (
-                    <p key={i}>• {d}</p>
-                  ))}
+                {/* Description */}
+                <div className="description-section">
+                  <span className="detail-label">Highlights</span>
+
+                  <div className="desc">
+                    {selectedProject.description.map(
+                      (description, index) => (
+                        <p key={description}>
+                          <span>
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+                          {description}
+                        </p>
+                      )
+                    )}
+                  </div>
                 </div>
+
+                {/* Links */}
                 <div className="links">
-                  <a href={selectedProject.github} target="_blank">
-                    GitHub
-                  </a>
-                  <a href={selectedProject.live} target="_blank">
-                    Live
-                  </a>
+                  {selectedProject.github &&
+                    selectedProject.github !== "#" && (
+                      <a
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span>GitHub</span>
+                        <span>↗</span>
+                      </a>
+                    )}
+
+                  {selectedProject.live &&
+                    selectedProject.live !== "#" && (
+                      <a
+                        href={selectedProject.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span>Live Project</span>
+                        <span>↗</span>
+                      </a>
+                    )}
                 </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-      </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
