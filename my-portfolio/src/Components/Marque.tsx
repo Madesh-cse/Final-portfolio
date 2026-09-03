@@ -1,99 +1,60 @@
+
 function Marque() {
+  const skills = [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+    "React.js",
+    "Next.js",
+    "Node.js",
+    "Express",
+    "SQL",
+    "MongoDB",
+    "Python",
+    "Redux",
+    "SCSS",
+    "Git",
+    "GitHub",
+    "GitHub Actions",
+    "AWS S3",
+    "AWS EC2",
+    "Postman",
+    "Responsive Web Design",
+  ];
+
   return (
-    <div className="marquee-strip">
+    <section className="marquee-strip">
       <div className="marquee-container">
         <div className="marquee-inner">
-          {/* Skills */}
-          <span className="accent">HTML</span>
-          <span>·</span>
-          <span>CSS</span>
-          <span>·</span>
-          <span className="accent">JavaScript</span>
-          <span>·</span>
-          <span>TypeScript</span>
-          <span>·</span>
-          <span className="accent">React.js</span>
-          <span>·</span>
-          <span className="accent">Next.js</span>
-          <span>·</span>
-          <span>Node.js</span>
-          <span>·</span>
-          <span className="accent">Express</span>
-          <span>·</span>
-          <span>SQL</span>
-          <span>·</span>
-          <span className="accent">Bootstrap</span>
-          <span>·</span>
-          <span>Responsive Web Design</span>
-          <span>·</span>
-          <span className="accent">Python</span>
-          <span>·</span>
-          <span className="accent">GitHub Actions</span>
-          <span>·</span>
-          <span className="accent">AWS S3</span>
-          <span>·</span>
-          <span className="accent">AWS Ec2</span>
-          <span>·</span>
-          <span>Redux</span>
-          <span>·</span>
-          <span className="accent">SCSS</span>
-          <span>·</span>
-          <span>VS Code</span>
-          <span>·</span>
-          <span className="accent">Postman</span>
-          <span>·</span>
-          <span>Git</span>
-          <span>·</span>
-          <span className="accent">GitHub</span>
-          <span>·</span>
+          {/* First set */}
+          <div className="marquee-group">
+            {skills.map((skill, index) => (
+              <span
+                key={`first-${skill}`}
+                className={index % 3 === 0 ? "accent" : ""}
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
 
-          {/* Duplicate for infinite scroll */}
-          <span className="accent">HTML</span>
-          <span>·</span>
-          <span>CSS</span>
-          <span>·</span>
-          <span className="accent">JavaScript</span>
-          <span>·</span>
-          <span>TypeScript</span>
-          <span>·</span>
-          <span className="accent">React.js</span>
-          <span>·</span>
-          <span className="accent">Next.js</span>
-          <span>·</span>
-          <span>Node.js</span>
-          <span>·</span>
-          <span className="accent">Express</span>
-          <span>·</span>
-          <span>SQL</span>
-          <span>·</span>
-          <span className="accent">Bootstrap</span>
-          <span>·</span>
-          <span>Responsive Web Design</span>
-          <span>·</span>
-           <span className="accent">Python</span>
-          <span>·</span>
-          <span className="accent">GitHub Actions</span>
-          <span>·</span>
-          <span className="accent">AWS S3</span>
-          <span>·</span>
-          <span className="accent">AWS Ec2</span>
-          <span>·</span>
-          <span>Redux</span>
-          <span>·</span>
-          <span className="accent">SCSS</span>
-          <span>·</span>
-          <span>VS Code</span>
-          <span>·</span>
-          <span className="accent">Postman</span>
-          <span>·</span>
-          <span>Git</span>
-          <span>·</span>
-          <span className="accent">GitHub</span>
-          <span>·</span>
+          {/* Duplicate set */}
+          <div className="marquee-group" aria-hidden="true">
+            {skills.map((skill, index) => (
+              <span
+                key={`second-${skill}`}
+                className={index % 3 === 0 ? "accent" : ""}
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
 export default Marque;
+
