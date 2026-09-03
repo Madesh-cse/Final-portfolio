@@ -11,6 +11,23 @@ import udemyImg5 from "../assets/udemy-img-5.png";
 import udemyImg6 from "../assets/udemy-img-6.png";
 import Elearning from "../assets/Video/E-Learning.mp4";
 
+import chatAiImg1 from "../assets/chat-ai-1.jpeg"
+import chatAiImg2 from "../assets/chat-ai-2.jpeg"
+import chatAiImg3 from "../assets/chat-ai-3.jpeg"
+import chatAiImg4 from "../assets/chat-ai-4.jpeg"
+import chatAiImg5 from "../assets/chat-ai-5.jpeg"
+import chatAiImg6 from "../assets/chat-ai-6.jpeg"
+import chatAiImg7 from "../assets/chat-ai-7.jpeg"
+import chatAiImg8 from "../assets/chat-ai-8.jpeg"
+import chatAiImg9 from "../assets/chat-ai-9.jpeg"
+import chatAiImg10 from "../assets/chat-ai-10.jpeg"
+import chatAiImg11 from "../assets/chat-ai-11.jpeg"
+import chatAiImg12 from "../assets/chat-ai-12.jpeg"
+import chatAiImg13 from "../assets/chat-ai-13.jpeg"
+import chatAiImg14 from "../assets/chat-ai-14.jpeg"
+import chatAiImg15 from "../assets/chat-ai-15.jpeg"
+import chatAiImg16 from "../assets/chat-ai-16.jpeg"
+
 // PMS IMG
 import pmsImg1 from "../assets/Screenshot 2026-03-26 071435.png";
 import pmsImg2 from "../assets/Screenshot 2026-03-26 071547.png";
@@ -85,6 +102,41 @@ const projects: Project[] = [
   },
   {
     idx: "02",
+    title: "AI Chat Assistant",
+    sub: "Agentic LLM with tool integration",
+    category: "AI + Full Stack",
+    year: "2026",
+    techStack: ["Next.js", "FastAPI", "LangChain", "PostgreSQL"],
+    description: [
+      "Agentic LLM workflows via LangGraph",
+      "Real-time token-level response streaming",
+      "8+ external tool integrations",
+      "Redis caching & persistent chat history",
+    ],
+    images: [
+      chatAiImg1,
+      chatAiImg2,
+      chatAiImg3,
+      chatAiImg4,
+      chatAiImg5,
+      chatAiImg6,
+      chatAiImg7,
+      chatAiImg8,
+      chatAiImg9,
+      chatAiImg10,
+      chatAiImg11,
+      chatAiImg12,
+      chatAiImg13,
+      chatAiImg14,
+      chatAiImg15,
+      chatAiImg16,
+    ],
+    video: pmsVideo,
+    github: "https://github.com/yourrepo/ai-project",
+    live: "#",
+  },
+  {
+    idx: "03",
     title: "E-Learning Web App (Udemy-Like Platform)",
     sub: "Full-stack scalable learning platform",
     category: "Full Stack",
@@ -102,7 +154,7 @@ const projects: Project[] = [
     live: "#",
   },
   {
-    idx: "03",
+    idx: "04",
     title: "AI Note Taker with Contextual Highlights",
     sub: "AI-powered notes + collaboration",
     category: "AI App",
@@ -120,7 +172,7 @@ const projects: Project[] = [
     live: "#",
   },
   {
-    idx: "04",
+    idx: "05",
     title: "Online Food Ordering System",
     sub: "Cross-device ordering platform",
     category: "Frontend + Firebase",
