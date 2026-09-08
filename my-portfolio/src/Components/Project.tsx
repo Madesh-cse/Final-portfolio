@@ -132,7 +132,7 @@ const projects: Project[] = [
     ],
     video: pmsVideo,
     github: "https://github.com/Madesh-cse/AI-Chat-Assistant-Backend",
-    live: "#",
+    live: "https://ai-chat-assistant-frontend-axxc.vercel.app",
   },
   {
     idx: "03",
