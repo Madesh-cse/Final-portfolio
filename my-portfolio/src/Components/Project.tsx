@@ -26,7 +26,7 @@ import chatAiImg13 from "../assets/chat-ai-13.jpeg";
 import chatAiImg14 from "../assets/chat-ai-14.jpeg";
 import chatAiImg15 from "../assets/chat-ai-15.jpeg";
 import chatAiImg16 from "../assets/chat-ai-16.jpeg";
-import chatAiVideo from "../assets/Video/AI Chat Assistant.mp4";
+import chatAiVideo from "../assets/Video/Ai-chat-assistant.mp4";
 
 // PMS
 import pmsImg1 from "../assets/Screenshot 2026-03-26 071435.png";
