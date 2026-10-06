@@ -1,4 +1,3 @@
-
 :root {
   --white: #ffffff;
   --off-white: #fafaf8;
@@ -20,7 +19,6 @@
 
 .marquee-strip {
   width: 100%;
-
   background: var(--paper);
 }
 
@@ -29,57 +27,56 @@
 ========================= */
 
 .marquee-container {
-  width: 100%;
-
-  overflow: hidden;
-
   position: relative;
+  width: 100%;
+  overflow: hidden;
 
   padding: 18px 0;
 
   border-top: 1px solid var(--border-soft);
   border-bottom: 1px solid var(--border-soft);
 
-  /* Prevent text selection */
   user-select: none;
+}
 
-  /* Fade edges */
-  &::before,
-  &::after {
-    content: "";
+/* =========================
+   FADE EDGES
+========================= */
 
-    position: absolute;
+.marquee-container::before,
+.marquee-container::after {
+  content: "";
 
-    top: 0;
+  position: absolute;
 
-    width: 100px;
+  top: 0;
 
-    height: 100%;
+  width: 100px;
+  height: 100%;
 
-    z-index: 5;
+  z-index: 5;
 
-    pointer-events: none;
-  }
+  pointer-events: none;
+}
 
-  &::before {
-    left: 0;
+.marquee-container::before {
+  left: 0;
 
-    background: linear-gradient(
-      to right,
-      var(--paper),
-      transparent
-    );
-  }
+  background: linear-gradient(
+    to right,
+    var(--paper),
+    transparent
+  );
+}
 
-  &::after {
-    right: 0;
+.marquee-container::after {
+  right: 0;
 
-    background: linear-gradient(
-      to left,
-      var(--paper),
-      transparent
-    );
-  }
+  background: linear-gradient(
+    to left,
+    var(--paper),
+    transparent
+  );
 }
 
 /* =========================
@@ -91,25 +88,19 @@
 
   width: max-content;
 
-  /*
-    Important:
-    The two groups are identical.
-
-    Therefore moving -50% creates
-    a seamless infinite loop.
-  */
-
-  animation: marquee 30s linear infinite;
+  animation: marquee 25s linear infinite;
 
   will-change: transform;
+}
 
-  &:hover {
-    animation-play-state: paused;
-  }
+/* Pause on hover */
+
+.marquee-container:hover .marquee-inner {
+  animation-play-state: paused;
 }
 
 /* =========================
-   EACH GROUP
+   GROUP
 ========================= */
 
 .marquee-group {
@@ -125,7 +116,7 @@
 }
 
 /* =========================
-   SKILL ITEMS
+   SKILL
 ========================= */
 
 .marquee-group span {
@@ -148,7 +139,9 @@
     transform 0.25s ease;
 }
 
-/* Accent skills */
+/* =========================
+   ACCENT
+========================= */
 
 .marquee-group span.accent {
   color: var(--text);
@@ -156,7 +149,9 @@
   font-weight: 600;
 }
 
-/* Hover */
+/* =========================
+   HOVER
+========================= */
 
 .marquee-group span:hover {
   color: var(--red);
@@ -164,7 +159,9 @@
   transform: translateY(-2px);
 }
 
-/* Separator */
+/* =========================
+   SEPARATOR
+========================= */
 
 .marquee-group span:not(:last-child)::after {
   content: "·";
@@ -175,16 +172,16 @@
 }
 
 /* =========================
-   MARQUEE ANIMATION
+   ANIMATION
 ========================= */
 
 @keyframes marquee {
-  from {
-    transform: translateX(0);
+  0% {
+    transform: translate3d(0, 0, 0);
   }
 
-  to {
-    transform: translateX(-50%);
+  100% {
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -198,18 +195,16 @@
   }
 
   .marquee-inner {
-    animation-duration: 22s;
+    animation-duration: 20s;
   }
 
   .marquee-group {
     gap: 20px;
-
     padding-right: 20px;
   }
 
   .marquee-group span {
     font-size: 11px;
-
     letter-spacing: 0.06em;
   }
 
@@ -233,12 +228,11 @@
   }
 
   .marquee-inner {
-    animation-duration: 18s;
+    animation-duration: 16s;
   }
 
   .marquee-group {
     gap: 16px;
-
     padding-right: 16px;
   }
 
@@ -262,6 +256,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-inner {
-    animation: none;
+    animation: marquee 25s linear infinite !important;
   }
 }

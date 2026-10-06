@@ -1,4 +1,3 @@
-
 function Marque() {
   const skills = [
     "HTML",
@@ -12,6 +11,11 @@ function Marque() {
     "SQL",
     "MongoDB",
     "Python",
+    "NLP",
+    "LLM",
+    "LangChain",
+    "LangGraph",
+    "FastAPI",
     "Redux",
     "SCSS",
     "Git",
@@ -27,7 +31,7 @@ function Marque() {
     <section className="marquee-strip">
       <div className="marquee-container">
         <div className="marquee-inner">
-          {/* First set */}
+          {/* First group */}
           <div className="marquee-group">
             {skills.map((skill, index) => (
               <span
@@ -39,7 +43,7 @@ function Marque() {
             ))}
           </div>
 
-          {/* Duplicate set */}
+          {/* Duplicate group for seamless loop */}
           <div className="marquee-group" aria-hidden="true">
             {skills.map((skill, index) => (
               <span
@@ -57,4 +61,3 @@ function Marque() {
 }
 
 export default Marque;
-
