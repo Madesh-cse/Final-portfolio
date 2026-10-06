@@ -40,7 +40,7 @@ function Footer() {
             link: "https://github.com/Madesh-cse",
           },
           { name: "Portfolio", link: "#" },
-          { name: "Resume", link: "https://drive.google.com/file/d/1m1MsPReWz7Fr2rrmDySrE5aBBPgijReM/view?usp=drive_link" },
+          { name: "Resume", link: "https://drive.google.com/file/d/1JeOSy3mPH6gu11eHLvph882NFM2nCj29/view?usp=drive_link" },
         ].map((item, index) => (
           <motion.li key={index} variants={fadeUp}>
             <motion.a
