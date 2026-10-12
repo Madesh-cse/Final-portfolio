@@ -28,6 +28,20 @@ import chatAiImg15 from "../assets/chat-ai-15.jpeg";
 import chatAiImg16 from "../assets/chat-ai-16.jpeg";
 import chatAiVideo from "../assets/Video/Ai-chat-assistant.mp4";
 
+// AI-Powered Document Intelligence & Approval Platform
+import aipdas1 from "../assets/AIDPAS-1.jpeg";
+import aipdas2 from "../assets/AIDPAS-2.jpeg";
+import aipdas3 from "../assets/AIDPAS-3.jpeg";
+import aipdas4 from "../assets/AIDPAS-4.jpeg";
+import aipdas5 from "../assets/AIDPAS-5.jpeg";
+import aipdas6 from "../assets/AIDPAS-6.jpeg";
+import aipdas7 from "../assets/AIDPAS-7.jpeg";
+import aipdas8 from "../assets/AIDPAS-8.jpeg";
+import aipdas9 from "../assets/AIDPAS-9.jpeg";
+import aipdas10 from "../assets/AIDPAS-10.jpeg";
+
+import aipoweredDocumentvideo from "../assets/Video/AI-Powered-Document-Approval-System.mp4"
+
 // PMS
 import pmsImg1 from "../assets/Screenshot 2026-03-26 071435.png";
 import pmsImg2 from "../assets/Screenshot 2026-03-26 071547.png";
@@ -47,15 +61,6 @@ import CH3 from "../assets/CH 3.png";
 import CH4 from "../assets/CH 4.png";
 import CHVideo from "../assets/Video/Video Project.mp4";
 
-// Food
-import fawImg from "../assets/faw-img-1.png";
-import fawImg1 from "../assets/faw-img-2.png";
-import fawImg2 from "../assets/faw-img-3.png";
-import fawImg3 from "../assets/faw-img-4.png";
-import fawImg4 from "../assets/faw-img-5.png";
-import fawImg5 from "../assets/faw-img-6.png";
-import fawImg6 from "../assets/faw-img-7.png";
-import FoodDemo from "../assets/Video/Food-order.mp4";
 
 type Project = {
   idx: string;
@@ -74,34 +79,6 @@ type Project = {
 const projects: Project[] = [
   {
     idx: "01",
-    title: "AI Project Management System",
-    sub: "Agent-based intelligent system",
-    category: "AI + Full Stack",
-    year: "2026",
-    techStack: ["React", "LangChain", "Node", "MongoDB"],
-    description: [
-      "AI-powered project assistant",
-      "LangChain & LangGraph integration",
-      "Predictive workload analysis",
-      "GitHub OAuth workflow",
-    ],
-    images: [
-      pmsImg1,
-      pmsImg2,
-      pmsImg3,
-      pmsImg4,
-      pmsImg5,
-      pmsImg6,
-      pmsImg7,
-      pmsImg8,
-      pmsImg9,
-    ],
-    video: pmsVideo,
-    github: "https://github.com/yourrepo/ai-project",
-    live: "#",
-  },
-  {
-    idx: "02",
     title: "AI Chat Assistant",
     sub: "Agentic LLM with tool integration",
     category: "AI + Full Stack",
@@ -136,7 +113,66 @@ const projects: Project[] = [
     live: "https://ai-chat-assistant-frontend-axxc.vercel.app",
   },
   {
+    idx: "02",
+    title: "AI-Powered Document Intelligence & Approval Platform",
+    sub: "AI-driven document processing and approval workflows",
+    category: "Full Stack + Agentic AI",
+    year: "2026",
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "FastAPI",
+      "PostgreSQL",
+      "LangChain",
+      "LangGraph",
+      "RAG",
+      "ChromaDB",
+      "OpenAI",
+      "MCP",
+      "AWS S3",
+      "Docker",
+    ],
+    description: [
+      "Automated document classification, information extraction, and validation",
+      "Implemented JWT authentication and role-based access control",
+      "Built RAG-powered document Q&A with ChromaDB and LLM integration",
+      "Integrated AWS S3 storage, Docker, and MCP-based Google Calendar approval scheduling",
+    ],
+    images: [aipdas1, aipdas2, aipdas3, aipdas4, aipdas5, aipdas6, aipdas7, aipdas8, aipdas9, aipdas10],
+    video: aipoweredDocumentvideo,
+    github: "https://github.com/Madesh-cse/AI-Document-Approval-system-backend",
+    live: "https://drive.google.com/file/d/1QCYanANUBEmQn6LIpcwOEvcEy43g9GKv/view?usp=drive_link",
+  },
+  {
     idx: "03",
+    title: "AI Project Management System",
+    sub: "Agent-based intelligent system",
+    category: "AI + Full Stack",
+    year: "2026",
+    techStack: ["React", "LangChain", "Node", "MongoDB"],
+    description: [
+      "AI-powered project assistant",
+      "LangChain & LangGraph integration",
+      "Predictive workload analysis",
+      "GitHub OAuth workflow",
+    ],
+    images: [
+      pmsImg1,
+      pmsImg2,
+      pmsImg3,
+      pmsImg4,
+      pmsImg5,
+      pmsImg6,
+      pmsImg7,
+      pmsImg8,
+      pmsImg9,
+    ],
+    video: pmsVideo,
+    github: "https://github.com/yourrepo/ai-project",
+    live: "#",
+  },
+  {
+    idx: "04",
     title: "E-Learning Web App",
     sub: "Udemy-like full-stack learning platform",
     category: "Full Stack",
@@ -154,7 +190,7 @@ const projects: Project[] = [
     live: "#",
   },
   {
-    idx: "04",
+    idx: "05",
     title: "AI Note Taker",
     sub: "AI-powered notes + collaboration",
     category: "AI Application",
@@ -170,24 +206,6 @@ const projects: Project[] = [
     video: CHVideo,
     github: "https://github.com/yourrepo/notes",
     live: "#",
-  },
-  {
-    idx: "05",
-    title: "Online Food Ordering System",
-    sub: "Cross-device ordering platform",
-    category: "Frontend + Firebase",
-    year: "2024",
-    techStack: ["React", "Redux", "Firebase"],
-    description: [
-      "Built a responsive food ordering platform",
-      "Used Redux for state management",
-      "Integrated Firebase authentication",
-      "Optimized UI performance",
-    ],
-    images: [fawImg, fawImg1, fawImg2, fawImg3, fawImg4, fawImg5, fawImg6],
-    video: FoodDemo,
-    github: "https://github.com/Madesh-cse/online-food-order-react-app",
-    live: "https://online-food-order-react-app-cfp4.vercel.app/",
   },
 ];
 
@@ -239,7 +257,7 @@ function Project() {
 
     const maxStart = Math.max(
       selectedProject.images.length - VISIBLE_THUMBS,
-      0
+      0,
     );
 
     setThumbStart((prev) => Math.min(prev + 1, maxStart));
@@ -282,8 +300,8 @@ function Project() {
           </h2>
 
           <p>
-            A selection of projects exploring full-stack development,
-            artificial intelligence, and thoughtful user experiences.
+            A selection of projects exploring full-stack development, artificial
+            intelligence, and thoughtful user experiences.
           </p>
         </div>
       </div>
@@ -410,10 +428,7 @@ function Project() {
                     transition={{ duration: 0.3 }}
                   >
                     <video controls autoPlay muted loop playsInline>
-                      <source
-                        src={selectedProject.video}
-                        type="video/mp4"
-                      />
+                      <source src={selectedProject.video} type="video/mp4" />
                       Your browser does not support video playback.
                     </video>
                   </motion.div>
@@ -438,10 +453,7 @@ function Project() {
 
                       <div className="image-counter">
                         {String(activeImg + 1).padStart(2, "0")} /{" "}
-                        {String(selectedProject.images.length).padStart(
-                          2,
-                          "0"
-                        )}
+                        {String(selectedProject.images.length).padStart(2, "0")}
                       </div>
                     </div>
 
@@ -474,14 +486,9 @@ function Project() {
                                 index === activeImg ? "active" : ""
                               }`}
                               onClick={() => selectImage(index)}
-                              aria-label={`View screenshot ${
-                                index + 1
-                              }`}
+                              aria-label={`View screenshot ${index + 1}`}
                             >
-                              <img
-                                src={image}
-                                alt={`Thumbnail ${index + 1}`}
-                              />
+                              <img src={image} alt={`Thumbnail ${index + 1}`} />
                             </button>
                           ))}
                         </motion.div>
@@ -493,9 +500,8 @@ function Project() {
                         disabled={
                           thumbStart >=
                           Math.max(
-                            selectedProject.images.length -
-                              VISIBLE_THUMBS,
-                            0
+                            selectedProject.images.length - VISIBLE_THUMBS,
+                            0,
                           )
                         }
                         aria-label="Next screenshots"
@@ -520,14 +526,10 @@ function Project() {
 
                     <h3>{selectedProject.title}</h3>
 
-                    <p className="modal-subtitle">
-                      {selectedProject.sub}
-                    </p>
+                    <p className="modal-subtitle">{selectedProject.sub}</p>
                   </div>
 
-                  <span className="modal-year">
-                    {selectedProject.year}
-                  </span>
+                  <span className="modal-year">{selectedProject.year}</span>
                 </div>
 
                 {/* Tech */}
@@ -546,44 +548,38 @@ function Project() {
                   <span className="detail-label">Highlights</span>
 
                   <div className="desc">
-                    {selectedProject.description.map(
-                      (description, index) => (
-                        <p key={description}>
-                          <span>
-                            {String(index + 1).padStart(2, "0")}
-                          </span>
-                          {description}
-                        </p>
-                      )
-                    )}
+                    {selectedProject.description.map((description, index) => (
+                      <p key={description}>
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        {description}
+                      </p>
+                    ))}
                   </div>
                 </div>
 
                 {/* Links */}
                 <div className="links">
-                  {selectedProject.github &&
-                    selectedProject.github !== "#" && (
-                      <a
-                        href={selectedProject.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <span>GitHub</span>
-                        <span>↗</span>
-                      </a>
-                    )}
+                  {selectedProject.github && selectedProject.github !== "#" && (
+                    <a
+                      href={selectedProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span>GitHub</span>
+                      <span>↗</span>
+                    </a>
+                  )}
 
-                  {selectedProject.live &&
-                    selectedProject.live !== "#" && (
-                      <a
-                        href={selectedProject.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <span>Live Project</span>
-                        <span>↗</span>
-                      </a>
-                    )}
+                  {selectedProject.live && selectedProject.live !== "#" && (
+                    <a
+                      href={selectedProject.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span>Live Project</span>
+                      <span>↗</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>
