@@ -168,7 +168,7 @@ const projects: Project[] = [
       pmsImg9,
     ],
     video: pmsVideo,
-    github: "https://github.com/yourrepo/ai-project",
+    github: "https://github.com/Madesh-cse/A-Human-AI-Collaborative-Project-Management-System-with-Agent-Based-Intelligence",
     live: "#",
   },
   {
@@ -186,7 +186,7 @@ const projects: Project[] = [
     ],
     images: [udemyImg1, udemyImg2, udemyImg3, udemyImg4, udemyImg5, udemyImg6],
     video: Elearning,
-    github: "https://github.com/yourrepo/elearning",
+    github: "https://github.com/Madesh-cse/Udemy-Clone",
     live: "#",
   },
   {
@@ -204,10 +204,11 @@ const projects: Project[] = [
     ],
     images: [CH1, CH2, CH3, CH4],
     video: CHVideo,
-    github: "https://github.com/yourrepo/notes",
+    github: "https://github.com/Madesh-cse/Real-time-ai-note-taker",
     live: "#",
   },
 ];
+
 
 function Project() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -219,16 +220,12 @@ function Project() {
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setSelectedProject(null);
-      }
+      if (event.key === "Escape") setSelectedProject(null);
     };
 
     window.addEventListener("keydown", handleEscape);
 
-    return () => {
-      window.removeEventListener("keydown", handleEscape);
-    };
+    return () => window.removeEventListener("keydown", handleEscape);
   }, []);
 
   useEffect(() => {
@@ -246,11 +243,7 @@ function Project() {
     setThumbStart(0);
   };
 
-  const closeProject = () => {
-    setSelectedProject(null);
-    setActiveImg(0);
-    setThumbStart(0);
-  };
+  const closeProject = () => setSelectedProject(null);
 
   const nextThumbs = () => {
     if (!selectedProject) return;
@@ -272,82 +265,152 @@ function Project() {
 
     if (index < thumbStart) {
       setThumbStart(index);
-    }
-
-    if (index >= thumbStart + VISIBLE_THUMBS) {
+    } else if (index >= thumbStart + VISIBLE_THUMBS) {
       setThumbStart(index - VISIBLE_THUMBS + 1);
     }
   };
 
   return (
     <section className="section projects-section" id="works">
-      {/* =========================
-          SECTION HEADER
-      ========================= */}
+      <div className="projects-shell">
+        {/* Section heading */}
+        <motion.div
+          className="projects-heading"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.65 }}
+        >
+          <div className="projects-eyebrow">
+            <span className="eyebrow-index">05</span>
+            <span className="eyebrow-line" />
+            <span>Portfolio / Selected Work</span>
+          </div>
 
-      <div className="projects-heading">
-        <div className="projects-eyebrow">
-          <span>05</span>
-          <span className="heading-line" />
-          <span>Selected Work</span>
+          <div className="projects-heading-content">
+            <div className="heading-copy">
+              <h2 className="section-title">
+                Ideas into
+                <br />
+                <em>real products.</em>
+              </h2>
+            </div>
+
+            <div className="heading-aside">
+              <span className="aside-mark">↘</span>
+              <p>
+                A collection of products, experiments, and intelligent
+                applications built through curiosity and code.
+              </p>
+
+              <div className="project-count">
+                <span>{String(projects.length).padStart(2, "0")}</span>
+                <span>Projects showcased</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Projects */}
+        <div className="projects-grid">
+          {projects.map((project, index) => (
+            <motion.article
+              key={project.idx}
+              className={`project-card ${
+                index === 0 ? "project-card-featured" : ""
+              }`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.12 }}
+              transition={{
+                duration: 0.55,
+                delay: (index % 2) * 0.08,
+                ease: "easeOut",
+              }}
+            >
+              <button
+                className="project-card-trigger"
+                type="button"
+                onClick={() => openProject(project)}
+                aria-label={`View ${project.title} project details`}
+              >
+                <div className="project-visual">
+                  <img
+                    className="project-cover"
+                    src={project.images[0]}
+                    alt={`${project.title} preview`}
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+
+                  <div className="visual-overlay" />
+
+                  <div className="visual-topline">
+                    <span className="visual-index">
+                      PROJECT / {project.idx}
+                    </span>
+                    <span className="visual-year">{project.year}</span>
+                  </div>
+
+                  <div className="visual-bottom">
+                    <span className="visual-category">
+                      {project.category}
+                    </span>
+
+                    <span className="project-open-icon" aria-hidden="true">
+                      <span>↗</span>
+                    </span>
+                  </div>
+
+                  <div className="visual-view-label">
+                    <span>Explore project</span>
+                    <span>↗</span>
+                  </div>
+                </div>
+
+                <div className="project-card-content">
+                  <div className="project-card-heading">
+                    <div>
+                      <h3>{project.title}</h3>
+                      <p>{project.sub}</p>
+                    </div>
+
+                    <span className="card-arrow" aria-hidden="true">
+                      ↗
+                    </span>
+                  </div>
+
+                  <div className="project-tech-preview">
+                    {project.techStack.slice(0, 4).map((technology) => (
+                      <span key={technology}>{technology}</span>
+                    ))}
+
+                    {project.techStack.length > 4 && (
+                      <span className="tech-more">
+                        +{project.techStack.length - 4}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </button>
+            </motion.article>
+          ))}
         </div>
 
-        <div className="projects-heading-content">
-          <h2 className="section-title">
-            Things I&apos;ve
-            <br />
-            <em>built.</em>
-          </h2>
-
-          <p>
-            A selection of projects exploring full-stack development, artificial
-            intelligence, and thoughtful user experiences.
-          </p>
-        </div>
+        {/* Closing note */}
+        <motion.div
+          className="projects-footer"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <span className="footer-line" />
+          <p>Built with curiosity. Improved with every iteration.</p>
+          <span className="footer-spark">✳</span>
+        </motion.div>
       </div>
 
-      {/* =========================
-          PROJECT LIST
-      ========================= */}
-
-      <div className="works-list">
-        {projects.map((project) => (
-          <motion.button
-            key={project.idx}
-            className="work-row"
-            onClick={() => openProject(project)}
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ x: 8 }}
-            transition={{
-              duration: 0.5,
-              ease: "easeOut",
-            }}
-            viewport={{
-              once: true,
-              amount: 0.15,
-            }}
-          >
-            <span className="work-idx">{project.idx}</span>
-
-            <span className="work-main">
-              <span className="work-title">{project.title}</span>
-              <span className="work-sub">{project.sub}</span>
-            </span>
-
-            <span className="work-category">{project.category}</span>
-
-            <span className="work-year">{project.year}</span>
-
-            <span className="work-arrow">↗</span>
-          </motion.button>
-        ))}
-      </div>
-
-      {/* =========================
-          PROJECT MODAL
-      ========================= */}
-
+      {/* Project detail modal */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -362,75 +425,96 @@ function Project() {
               role="dialog"
               aria-modal="true"
               aria-label={`${selectedProject.title} project details`}
-              onClick={(e) => e.stopPropagation()}
-              initial={{
-                opacity: 0,
-                y: 40,
-                scale: 0.96,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                y: 25,
-                scale: 0.97,
-              }}
-              transition={{
-                duration: 0.35,
-                ease: "easeOut",
-              }}
+              onClick={(event) => event.stopPropagation()}
+              initial={{ opacity: 0, y: 30, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.98 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              {/* Close */}
-              <button
-                className="close-btn"
-                onClick={closeProject}
-                aria-label="Close project"
-              >
-                ×
-              </button>
+              <div className="modal-topbar">
+                <div className="modal-project-number">
+                  <span className="modal-live-dot" />
+                  PROJECT / {selectedProject.idx}
+                </div>
 
-              {/* Project number */}
-              <div className="modal-project-number">
-                Project / {selectedProject.idx}
+                <button
+                  className="close-btn"
+                  onClick={closeProject}
+                  aria-label="Close project details"
+                  type="button"
+                  autoFocus
+                >
+                  <span>×</span>
+                </button>
               </div>
 
-              {/* Tabs */}
-              <div className="modal-tabs">
+              <div className="modal-heading">
+                <div>
+                  <span className="modal-category">
+                    {selectedProject.category}
+                  </span>
+                  <h3>{selectedProject.title}</h3>
+                  <p>{selectedProject.sub}</p>
+                </div>
+
+                <span className="modal-year">{selectedProject.year}</span>
+              </div>
+
+              {/* Media tabs */}
+              <div className="modal-tabs" role="tablist" aria-label="Project media">
                 <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === "demo"}
                   className={activeTab === "demo" ? "active" : ""}
                   onClick={() => setActiveTab("demo")}
                 >
                   <span>01</span>
-                  Live Demo
+                  Demo video
                 </button>
 
                 <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === "images"}
                   className={activeTab === "images" ? "active" : ""}
                   onClick={() => setActiveTab("images")}
                 >
                   <span>02</span>
                   Screenshots
+                  <span className="tab-count">
+                    {String(selectedProject.images.length).padStart(2, "0")}
+                  </span>
                 </button>
               </div>
 
-              {/* Media */}
+              {/* Media content */}
               <AnimatePresence mode="wait">
                 {activeTab === "demo" && (
                   <motion.div
                     key="demo"
                     className="video-wrapper"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.22 }}
                   >
-                    <video controls autoPlay muted loop playsInline>
-                      <source src={selectedProject.video} type="video/mp4" />
+                    <video
+                      controls
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      poster={selectedProject.images[0]}
+                    >
+                      <source
+                        src={selectedProject.video}
+                        type="video/mp4"
+                      />
                       Your browser does not support video playback.
                     </video>
+
+                    <span className="media-caption">PRODUCT WALKTHROUGH</span>
                   </motion.div>
                 )}
 
@@ -438,28 +522,32 @@ function Project() {
                   <motion.div
                     key="images"
                     className="screenshots-wrapper"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.22 }}
                   >
                     <div className="main-image">
                       <img
                         src={selectedProject.images[activeImg]}
-                        alt={`${selectedProject.title} screenshot ${
-                          activeImg + 1
-                        }`}
+                        alt={`${selectedProject.title} screenshot ${activeImg + 1}`}
                       />
 
                       <div className="image-counter">
-                        {String(activeImg + 1).padStart(2, "0")} /{" "}
-                        {String(selectedProject.images.length).padStart(2, "0")}
+                        <span>
+                          {String(activeImg + 1).padStart(2, "0")}
+                        </span>
+                        <span className="counter-divider">/</span>
+                        <span>
+                          {String(selectedProject.images.length).padStart(2, "0")}
+                        </span>
                       </div>
                     </div>
 
                     <div className="thumb-carousel">
                       <button
                         className="arrow"
+                        type="button"
                         onClick={prevThumbs}
                         disabled={thumbStart === 0}
                         aria-label="Previous screenshots"
@@ -470,25 +558,29 @@ function Project() {
                       <div className="thumb-window">
                         <motion.div
                           className="thumb-track"
-                          animate={{
-                            x: `-${thumbStart * 120}px`,
-                          }}
+                          animate={{ x: `-${thumbStart * 100}px` }}
                           transition={{
                             type: "spring",
-                            stiffness: 130,
-                            damping: 20,
+                            stiffness: 160,
+                            damping: 24,
                           }}
                         >
                           {selectedProject.images.map((image, index) => (
                             <button
-                              key={image}
+                              key={`${selectedProject.idx}-${index}`}
+                              type="button"
                               className={`thumb ${
                                 index === activeImg ? "active" : ""
                               }`}
                               onClick={() => selectImage(index)}
                               aria-label={`View screenshot ${index + 1}`}
+                              aria-pressed={index === activeImg}
                             >
-                              <img src={image} alt={`Thumbnail ${index + 1}`} />
+                              <img
+                                src={image}
+                                alt=""
+                                loading="lazy"
+                              />
                             </button>
                           ))}
                         </motion.div>
@@ -496,6 +588,7 @@ function Project() {
 
                       <button
                         className="arrow"
+                        type="button"
                         onClick={nextThumbs}
                         disabled={
                           thumbStart >=
@@ -513,28 +606,13 @@ function Project() {
                 )}
               </AnimatePresence>
 
-              {/* =========================
-                  PROJECT DETAILS
-              ========================= */}
-
+              {/* Project details */}
               <div className="modal-details">
-                <div className="modal-title-row">
-                  <div>
-                    <span className="modal-category">
-                      {selectedProject.category}
-                    </span>
-
-                    <h3>{selectedProject.title}</h3>
-
-                    <p className="modal-subtitle">{selectedProject.sub}</p>
+                <div className="detail-block">
+                  <div className="detail-heading">
+                    <span className="detail-index">01</span>
+                    <span className="detail-label">Technology stack</span>
                   </div>
-
-                  <span className="modal-year">{selectedProject.year}</span>
-                </div>
-
-                {/* Tech */}
-                <div className="tech-section">
-                  <span className="detail-label">Technology</span>
 
                   <div className="tech">
                     {selectedProject.techStack.map((technology) => (
@@ -543,44 +621,56 @@ function Project() {
                   </div>
                 </div>
 
-                {/* Description */}
-                <div className="description-section">
-                  <span className="detail-label">Highlights</span>
+                <div className="detail-block">
+                  <div className="detail-heading">
+                    <span className="detail-index">02</span>
+                    <span className="detail-label">Key highlights</span>
+                  </div>
 
                   <div className="desc">
                     {selectedProject.description.map((description, index) => (
-                      <p key={description}>
-                        <span>{String(index + 1).padStart(2, "0")}</span>
-                        {description}
-                      </p>
+                      <div className="desc-item" key={description}>
+                        <span className="desc-number">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <p>{description}</p>
+                      </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Links */}
-                <div className="links">
-                  {selectedProject.github && selectedProject.github !== "#" && (
-                    <a
-                      href={selectedProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span>GitHub</span>
-                      <span>↗</span>
-                    </a>
-                  )}
+                <div className="modal-actions">
+                  {selectedProject.github &&
+                    selectedProject.github !== "#" && (
+                      <a
+                        className="project-link project-link-primary"
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span>View source code</span>
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                    )}
 
-                  {selectedProject.live && selectedProject.live !== "#" && (
-                    <a
-                      href={selectedProject.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span>Live Project</span>
-                      <span>↗</span>
-                    </a>
-                  )}
+                  {selectedProject.live &&
+                    selectedProject.live !== "#" && (
+                      <a
+                        className="project-link project-link-secondary"
+                        href={selectedProject.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span>Explore project</span>
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                    )}
                 </div>
+              </div>
+
+              <div className="modal-footer">
+                <span>SELECTED WORK</span>
+                <span>{selectedProject.idx} / {String(projects.length).padStart(2, "0")}</span>
               </div>
             </motion.div>
           </motion.div>
@@ -591,3 +681,4 @@ function Project() {
 }
 
 export default Project;
+
