@@ -8,6 +8,7 @@ import About from './Components/About'
 import Contact from './Components/Contact'
 import Footer from './Components/Footer'
 import BackToTop from './Components/BackToTop'
+import PortfolioChat from './Components/PortfolioChat'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Footer/>
     </main>
     <BackToTop/>
+    <PortfolioChat />
     </>
   )
 }
