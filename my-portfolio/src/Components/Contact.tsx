@@ -1,6 +1,7 @@
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import type { FormEvent } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
 type FormData = {
@@ -9,57 +10,25 @@ type FormData = {
   message: string;
 };
 
-const container = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
+const initialForm: FormData = {
+  name: "",
+  email: "",
+  message: "",
 };
 
-const fadeUp = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-  },
+const reveal = {
+  hidden: { opacity: 0, y: 22 },
   show: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.65,
-      ease: "easeOut" as const,
-    },
+    transition: { duration: 0.55, ease: "easeOut" as const },
   },
 };
 
-const slideLeft = {
-  hidden: {
-    opacity: 0,
-    x: -60,
-  },
+const listReveal = {
+  hidden: {},
   show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut" as const,
-    },
-  },
-};
-
-const slideRight = {
-  hidden: {
-    opacity: 0,
-    x: 60,
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut" as const,
-    },
+    transition: { staggerChildren: 0.1 },
   },
 };
 
@@ -67,57 +36,88 @@ function Contact() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
+  const [statusType, setStatusType] = useState<"success" | "error" | "">("");
+  const [form, setForm] = useState<FormData>(initialForm);
 
-  const [form, setForm] = useState<FormData>({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+  const closeModal = () => {
+    if (loading) return;
+    setOpen(false);
   };
 
-  const handleSubmit = async () => {
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
-      setStatus("Please fill in all fields.");
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !loading) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open, loading]);
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+
+    setForm((current) => ({
+      ...current,
+      [name]: value,
+    }));
+
+    if (status) {
+      setStatus("");
+      setStatusType("");
+    }
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (loading) return;
+
+    if (
+      !form.name.trim() ||
+      !form.email.trim() ||
+      !form.message.trim()
+    ) {
+      setStatusType("error");
+      setStatus("Please complete all fields.");
       return;
     }
 
     try {
       setLoading(true);
       setStatus("");
+      setStatusType("");
 
       await emailjs.send(
         "service_q0o6sfa",
         "template_ri68xjk",
         {
-          from_name: form.name,
-          from_email: form.email,
-          message: form.message,
+          from_name: form.name.trim(),
+          from_email: form.email.trim(),
+          message: form.message.trim(),
         },
         "FZlueMMZ_K6xpBCHy"
       );
 
-      setStatus("Message sent successfully.");
-      setForm({
-        name: "",
-        email: "",
-        message: "",
-      });
-
-      setTimeout(() => {
-        setOpen(false);
-        setStatus("");
-      }, 1600);
+      setStatusType("success");
+      setStatus("Thanks for reaching out. Your message has been sent.");
+      setForm(initialForm);
     } catch (error) {
-      console.error(error);
-      setStatus("Something went wrong. Please try again.");
+      console.error("EmailJS submission failed:", error);
+      setStatusType("error");
+      setStatus("Unable to send your message. Please try again or email me directly.");
     } finally {
       setLoading(false);
     }
@@ -125,258 +125,254 @@ function Contact() {
 
   return (
     <>
-      <section className="contact-wrap" id="contact">
-        {/* Decorative background */}
-        <div className="contact-bg-text" aria-hidden="true">
-          CONTACT
-        </div>
+      <section className="contact-section" id="contact">
+        <div className="contact-container">
+          <div className="contact-section-top">
+            <span className="contact-section-label">
+              <span className="contact-label-dot" />
+              06 — Get in touch
+            </span>
+            <span className="contact-top-note">GOOD THINGS START WITH A HELLO.</span>
+          </div>
 
-        <div className="contact-grid">
-          {/* ================= LEFT ================= */}
-          <motion.div
-            className="contact-left"
-            variants={slideLeft}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <motion.div className="contact-eyebrow" variants={fadeUp}>
-              <span className="eyebrow-number">06</span>
-              <span className="eyebrow-line" />
-              <span>Let&apos;s Connect</span>
-            </motion.div>
-
-            <motion.h2 className="contact-title" variants={fadeUp}>
-              Have an idea?
-              <br />
-              Let&apos;s make it
-              <br />
-              <em>happen.</em>
-            </motion.h2>
-
-            <motion.p className="contact-desc" variants={fadeUp}>
-              I&apos;m always interested in hearing about new projects,
-              creative ideas, and opportunities to build meaningful digital
-              experiences.
-            </motion.p>
-
-            <motion.div className="contact-availability" variants={fadeUp}>
-              <span className="availability-dot" />
-              <span>Currently available for opportunities</span>
-            </motion.div>
-          </motion.div>
-
-          {/* ================= RIGHT ================= */}
-          <motion.div
-            className="contact-right"
-            variants={slideRight}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-          >
+          <div className="contact-layout">
+            {/* Introduction */}
             <motion.div
-              className="contact-info-list"
-              variants={container}
+              className="contact-intro"
+              variants={listReveal}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
             >
-              <motion.div className="contact-info-item" variants={fadeUp}>
-                <span className="contact-info-index">01</span>
+              <motion.p className="contact-kicker" variants={reveal}>
+                HAVE A PROJECT IN MIND?
+              </motion.p>
 
-                <div className="contact-info-content">
-                  <span className="contact-info-label">Email</span>
-                  <a
-                    href="mailto:madesh10cse@gmail.com"
-                    className="contact-info-value"
-                  >
-                    madesh10cse@gmail.com
-                  </a>
-                </div>
+              <motion.h2 className="contact-title" variants={reveal}>
+                Let&apos;s build
+                <br />
+                something <em>meaningful.</em>
+              </motion.h2>
 
-                <span className="contact-info-arrow">↗</span>
-              </motion.div>
+              <motion.p className="contact-description" variants={reveal}>
+                Whether you have a project idea, an opportunity, or simply want
+                to talk about web development and AI, I&apos;d be glad to hear
+                from you.
+              </motion.p>
 
-              <motion.div className="contact-info-item" variants={fadeUp}>
-                <span className="contact-info-index">02</span>
+              <motion.button
+                type="button"
+                className="contact-primary-button"
+                onClick={() => {
+                  setStatus("");
+                  setStatusType("");
+                  setOpen(true);
+                }}
+                variants={reveal}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span>Start a conversation</span>
+                <span className="contact-button-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </motion.button>
 
-                <div className="contact-info-content">
-                  <span className="contact-info-label">Location</span>
-                  <span className="contact-info-value">
-                    Madurai, India
-                  </span>
-                </div>
-
-                <span className="contact-info-arrow">↗</span>
-              </motion.div>
-
-              <motion.div className="contact-info-item" variants={fadeUp}>
-                <span className="contact-info-index">03</span>
-
-                <div className="contact-info-content">
-                  <span className="contact-info-label">Availability</span>
-
-                  <span className="contact-info-value availability-value">
-                    <span className="mini-dot" />
-                    Open to Work
-                  </span>
-                </div>
-
-                <span className="contact-info-arrow">↗</span>
+              <motion.div className="contact-availability" variants={reveal}>
+                <span className="contact-status-dot" />
+                <span>Open to software development and AI opportunities</span>
               </motion.div>
             </motion.div>
 
-            {/* CTA */}
-            <motion.button
-              className="contact-cta"
-              onClick={() => setOpen(true)}
-              variants={fadeUp}
+            {/* Contact details */}
+            <motion.div
+              className="contact-details"
+              variants={listReveal}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true }}
-              whileHover={{ x: 6 }}
-              whileTap={{ scale: 0.98 }}
+              viewport={{ once: true, amount: 0.2 }}
             >
-              <span>Start a conversation</span>
-              <span className="cta-arrow">↗</span>
-            </motion.button>
-          </motion.div>
-        </div>
+              <motion.div className="contact-details-heading" variants={reveal}>
+                <span>CONTACT DETAILS</span>
+                <span>01 — 03</span>
+              </motion.div>
 
-        {/* Bottom line */}
-        <motion.div
-          className="contact-footer-line"
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-        >
-          <span>Available for freelance &amp; full-time opportunities</span>
-          <span>© {new Date().getFullYear()} Madesh Mohan</span>
-        </motion.div>
+              <motion.a
+                className="contact-detail-row"
+                href="mailto:madesh10cse@gmail.com"
+                variants={reveal}
+              >
+                <span className="contact-detail-number">01</span>
+                <span className="contact-detail-main">
+                  <span className="contact-detail-label">Email</span>
+                  <span className="contact-detail-value">
+                    madesh10cse@gmail.com
+                  </span>
+                </span>
+                <span className="contact-detail-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </motion.a>
+
+              <motion.div className="contact-detail-row" variants={reveal}>
+                <span className="contact-detail-number">02</span>
+                <span className="contact-detail-main">
+                  <span className="contact-detail-label">Location</span>
+                  <span className="contact-detail-value">Madurai, India</span>
+                </span>
+                <span className="contact-detail-symbol" aria-hidden="true">
+                  +
+                </span>
+              </motion.div>
+
+              <motion.div className="contact-detail-row" variants={reveal}>
+                <span className="contact-detail-number">03</span>
+                <span className="contact-detail-main">
+                  <span className="contact-detail-label">Currently interested in</span>
+                  <span className="contact-detail-value">
+                    Full Stack Development · AI Engineering
+                  </span>
+                </span>
+                <span className="contact-detail-symbol" aria-hidden="true">
+                  +
+                </span>
+              </motion.div>
+
+              <motion.div className="contact-note" variants={reveal}>
+                <span className="contact-note-mark">“</span>
+                <p>
+                  Great products begin with good conversations. Let&apos;s see
+                  what we can create together.
+                </p>
+              </motion.div>
+            </motion.div>
+          </div>
+
+          <div className="contact-bottom-line">
+            <span>Always learning. Always building.</span>
+            <span>© {new Date().getFullYear()} Madesh Mohan</span>
+          </div>
+        </div>
       </section>
 
-      {/* ================= MODAL ================= */}
+      {/* Contact form modal */}
       <AnimatePresence>
         {open && (
           <motion.div
-            className="contact-modal-overlay"
-            onClick={() => setOpen(false)}
+            className="contact-modal-backdrop"
+            role="presentation"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) closeModal();
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
               className="contact-modal"
-              onClick={(e) => e.stopPropagation()}
-              initial={{
-                opacity: 0,
-                y: 40,
-                scale: 0.94,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                y: 20,
-                scale: 0.96,
-              }}
-              transition={{
-                duration: 0.35,
-                ease: "easeOut",
-              }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="contact-modal-title"
+              aria-describedby="contact-modal-description"
+              initial={{ opacity: 0, y: 18, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.98 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
             >
-              <button
-                className="contact-close-btn"
-                onClick={() => setOpen(false)}
-                aria-label="Close contact form"
-              >
-                ×
-              </button>
+              <div className="contact-modal-top">
+                <span>06 / CONTACT FORM</span>
+                <button
+                  type="button"
+                  className="contact-modal-close"
+                  onClick={closeModal}
+                  disabled={loading}
+                  aria-label="Close contact form"
+                >
+                  ×
+                </button>
+              </div>
 
-              <div className="modal-header">
-                <span>06 — Contact</span>
-                <h3>
-                  Let&apos;s start
+              <div className="contact-modal-heading">
+                <h3 id="contact-modal-title">
+                  Tell me about
                   <br />
-                  <em>something.</em>
+                  <em>your idea.</em>
                 </h3>
-                <p>
-                  Tell me a little about your project and I&apos;ll get back
-                  to you soon.
+                <p id="contact-modal-description">
+                  Share a few details below and I&apos;ll get back to you by email.
                 </p>
               </div>
 
-              <div className="contact-form">
-                <div className="form-field">
-                  <label htmlFor="name">01 — Name</label>
-
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="contact-form-field">
+                  <label htmlFor="contact-name">01 — Your name</label>
                   <input
-                    id="name"
+                    id="contact-name"
                     name="name"
                     type="text"
-                    placeholder="Your name"
+                    placeholder="Enter your name"
                     value={form.name}
                     onChange={handleChange}
                     autoComplete="name"
+                    maxLength={100}
+                    required
                   />
                 </div>
 
-                <div className="form-field">
-                  <label htmlFor="email">02 — Email</label>
-
+                <div className="contact-form-field">
+                  <label htmlFor="contact-email">02 — Email address</label>
                   <input
-                    id="email"
+                    id="contact-email"
                     name="email"
                     type="email"
                     placeholder="you@example.com"
                     value={form.email}
                     onChange={handleChange}
                     autoComplete="email"
+                    maxLength={254}
+                    required
                   />
                 </div>
 
-                <div className="form-field">
-                  <label htmlFor="message">03 — Message</label>
-
+                <div className="contact-form-field">
+                  <label htmlFor="contact-message">03 — Your message</label>
                   <textarea
-                    id="message"
+                    id="contact-message"
                     name="message"
-                    placeholder="Tell me about your project..."
+                    placeholder="What would you like to build?"
                     value={form.message}
                     onChange={handleChange}
+                    rows={4}
+                    maxLength={5000}
+                    required
                   />
                 </div>
 
                 <button
-                  className="form-submit"
-                  onClick={handleSubmit}
+                  className="contact-form-submit"
+                  type="submit"
                   disabled={loading}
                 >
-                  <span>{loading ? "Sending..." : "Send Message"}</span>
-                  <span>↗</span>
+                  <span>{loading ? "Sending message..." : "Send message"}</span>
+                  <span aria-hidden="true">{loading ? "…" : "↗"}</span>
                 </button>
 
                 <AnimatePresence mode="wait">
                   {status && (
                     <motion.p
-                      className={`status-msg ${
-                        status.includes("successfully")
-                          ? "success"
-                          : "error"
-                      }`}
-                      initial={{ opacity: 0, y: 8 }}
+                      key={status}
+                      className={`contact-form-status ${statusType}`}
+                      role="status"
+                      aria-live="polite"
+                      initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
                     >
                       {status}
                     </motion.p>
                   )}
                 </AnimatePresence>
-              </div>
+              </form>
             </motion.div>
           </motion.div>
         )}
@@ -386,4 +382,3 @@ function Contact() {
 }
 
 export default Contact;
-

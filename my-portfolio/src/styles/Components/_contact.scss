@@ -1,675 +1,759 @@
 
-.contact-wrap {
+/* =========================================
+   CONTACT SECTION
+========================================= */
+
+.contact-section {
   position: relative;
-  width: 100%;
-  padding: 120px 68px 34px;
+  overflow: hidden;
+  padding: 105px 68px 28px;
   background: var(--text);
   color: var(--white);
-  overflow: hidden;
 }
 
-/* =========================
-   BACKGROUND TYPOGRAPHY
-========================= */
-
-.contact-bg-text {
-  position: absolute;
-  right: -30px;
-  bottom: -80px;
-
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(180px, 25vw, 420px);
-  font-weight: 600;
-  line-height: 0.7;
-  letter-spacing: -0.08em;
-  color: rgba(255, 255, 255, 0.025);
-  pointer-events: none;
-  user-select: none;
-}
-
-/* =========================
-   MAIN GRID
-========================= */
-
-.contact-grid {
+.contact-container {
   position: relative;
-  z-index: 2;
-
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 100px;
-  max-width: 1280px;
+  z-index: 1;
+  width: 100%;
+  max-width: 1380px;
   margin: 0 auto;
 }
 
-/* =========================
-   LEFT
-========================= */
+/* Subtle background detail */
 
-.contact-left {
-  max-width: 700px;
+.contact-section::before {
+  position: absolute;
+  top: 90px;
+  right: -180px;
+  width: 440px;
+  height: 440px;
+  border: 1px solid rgba(255, 255, 255, 0.045);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
 }
 
-.contact-eyebrow {
+.contact-section::after {
+  position: absolute;
+  top: 145px;
+  right: -125px;
+  width: 330px;
+  height: 330px;
+  border: 1px solid rgba(255, 255, 255, 0.035);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+/* =========================================
+   TOPLINE
+========================================= */
+
+.contact-section-top {
   display: flex;
   align-items: center;
-  gap: 14px;
-
-  margin-bottom: 34px;
-
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.38);
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-.eyebrow-number {
-  color: var(--red);
+.contact-section-label,
+.contact-top-note {
   font-family: "DM Mono", monospace;
   font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.eyebrow-line {
-  width: 45px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.18);
-}
-
-.contact-title {
-  margin: 0 0 32px;
-
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(58px, 7vw, 100px);
-  font-weight: 600;
-  line-height: 0.88;
-  letter-spacing: -0.045em;
-  color: var(--white);
-
-  em {
-    color: var(--red);
-    font-weight: 300;
-    font-style: italic;
-  }
-}
-
-.contact-desc {
-  max-width: 470px;
-  margin: 0;
-
-  font-size: 14px;
-  line-height: 1.9;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.42);
-}
-
-.contact-availability {
-  display: inline-flex;
+.contact-section-label {
+  display: flex;
   align-items: center;
   gap: 10px;
-
-  margin-top: 38px;
-  padding: 10px 14px;
-
-  border: 1px solid rgba(255, 255, 255, 0.1);
-
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.48);
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.availability-dot,
-.mini-dot {
+.contact-label-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #5fba7d;
-  box-shadow: 0 0 0 4px rgba(95, 186, 125, 0.08);
+  background: var(--red);
 }
 
-/* =========================
-   RIGHT
-========================= */
-
-.contact-right {
-  align-self: end;
+.contact-top-note {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 9px;
 }
 
-.contact-info-list {
-  margin: 0 0 42px;
-  padding: 0;
-  list-style: none;
-}
+/* =========================================
+   MAIN LAYOUT
+========================================= */
 
-.contact-info-item {
+.contact-layout {
   display: grid;
-  grid-template-columns: 34px 1fr 30px;
+  grid-template-columns: 1.05fr 0.8fr;
   align-items: center;
-  gap: 18px;
-
-  min-height: 92px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
-
-  transition:
-    padding 0.35s ease,
-    border-color 0.35s ease;
-
-  &:first-child {
-    border-top: 1px solid rgba(255, 255, 255, 0.09);
-  }
-
-  &:hover {
-    padding-left: 8px;
-    border-color: rgba(192, 57, 43, 0.5);
-
-    .contact-info-arrow {
-      color: var(--red);
-      transform: translate(3px, -3px);
-    }
-
-    .contact-info-value {
-      color: var(--white);
-    }
-  }
+  gap: clamp(65px, 10vw, 150px);
+  padding: 95px 0 105px;
 }
 
-.contact-info-index {
+/* =========================================
+   INTRODUCTION
+========================================= */
+
+.contact-intro {
+  max-width: 700px;
+}
+
+.contact-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 27px;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.13em;
+}
+
+.contact-kicker::before {
+  width: 28px;
+  height: 1px;
+  background: var(--red);
+  content: "";
+}
+
+.contact-title {
+  margin: 0;
+  color: var(--white);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(64px, 7.4vw, 104px);
+  font-weight: 500;
+  line-height: 0.91;
+  letter-spacing: -0.055em;
+}
+
+.contact-title em {
+  color: var(--red);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.contact-description {
+  max-width: 490px;
+  margin: 29px 0 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13px;
+  line-height: 1.95;
+}
+
+/* =========================================
+   PRIMARY CTA
+========================================= */
+
+.contact-primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  width: min(100%, 350px);
+  margin-top: 34px;
+  padding: 17px 19px;
+  border: 1px solid rgba(255, 255, 255, 0.23);
+  background: transparent;
+  color: var(--white);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.contact-primary-button:hover {
+  border-color: var(--red);
+  background: var(--red);
+}
+
+.contact-button-arrow {
+  font-size: 19px;
+  transition: transform 0.25s ease;
+}
+
+.contact-primary-button:hover .contact-button-arrow {
+  transform: translate(3px, -3px);
+}
+
+.contact-availability {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 25px;
+  color: rgba(255, 255, 255, 0.43);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.contact-status-dot {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #76b88a;
+}
+
+.contact-status-dot::after {
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(118, 184, 138, 0.25);
+  border-radius: 50%;
+  content: "";
+}
+
+/* =========================================
+   CONTACT DETAILS
+========================================= */
+
+.contact-details {
+  width: 100%;
+}
+
+.contact-details-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.17);
+  color: rgba(255, 255, 255, 0.4);
   font-family: "DM Mono", monospace;
   font-size: 9px;
-  color: rgba(255, 255, 255, 0.22);
+  letter-spacing: 0.12em;
 }
 
-.contact-info-content {
+.contact-detail-row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 15px;
+  min-height: 92px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: inherit;
+  text-decoration: none;
+  transition: padding 0.25s ease;
+}
+
+a.contact-detail-row:hover {
+  padding-left: 6px;
+}
+
+.contact-detail-number {
+  align-self: start;
+  padding-top: 3px;
+  color: rgba(255, 255, 255, 0.32);
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+}
+
+.contact-detail-main {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 7px;
+  min-width: 0;
 }
 
-.contact-info-label {
+.contact-detail-label {
+  color: rgba(255, 255, 255, 0.42);
+  font-family: "DM Mono", monospace;
   font-size: 9px;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.28);
 }
 
-.contact-info-value {
+.contact-detail-value {
+  overflow-wrap: anywhere;
+  color: rgba(255, 255, 255, 0.88);
   font-family: "Cormorant Garamond", serif;
-  font-size: 21px;
+  font-size: 22px;
   line-height: 1.2;
-  color: rgba(255, 255, 255, 0.82);
-  text-decoration: none;
-
-  transition: color 0.3s ease;
+  transition: color 0.25s ease;
 }
 
-.availability-value {
+a.contact-detail-row:hover .contact-detail-value {
+  color: #fff;
+}
+
+.contact-detail-arrow,
+.contact-detail-symbol {
+  justify-self: end;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 17px;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+a.contact-detail-row:hover .contact-detail-arrow {
+  color: var(--red);
+  transform: translate(3px, -3px);
+}
+
+.contact-detail-symbol {
+  font-size: 15px;
+}
+
+/* =========================================
+   QUOTE / NOTE
+========================================= */
+
+.contact-note {
   display: flex;
-  align-items: center;
-  gap: 9px;
+  align-items: flex-start;
+  gap: 13px;
+  margin-top: 27px;
 }
 
-.mini-dot {
-  width: 6px;
-  height: 6px;
+.contact-note-mark {
+  color: var(--red);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 43px;
+  line-height: 0.8;
 }
 
-.contact-info-arrow {
+.contact-note p {
+  max-width: 320px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: "Cormorant Garamond", serif;
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.25);
-
-  transition:
-    color 0.3s ease,
-    transform 0.3s ease;
+  font-style: italic;
+  line-height: 1.45;
 }
 
-/* =========================
-   CTA
-========================= */
+/* =========================================
+   BOTTOM LINE
+========================================= */
 
-.contact-cta {
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  width: 100%;
-  padding: 20px 22px;
-
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: transparent;
-
-  color: var(--white);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-
-  cursor: pointer;
-
-  transition:
-    background 0.35s ease,
-    border-color 0.35s ease,
-    color 0.35s ease;
-
-  &:hover {
-    background: var(--red);
-    border-color: var(--red);
-  }
-}
-
-.cta-arrow {
-  font-size: 20px;
-  font-weight: 300;
-}
-
-/* =========================
-   FOOTER LINE
-========================= */
-
-.contact-footer-line {
-  position: relative;
-  z-index: 2;
-
+.contact-bottom-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  max-width: 1280px;
-  margin: 100px auto 0;
+  gap: 20px;
   padding-top: 20px;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.35);
+  font-family: "DM Mono", monospace;
   font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.07em;
 }
 
-/* =========================
-   MODAL OVERLAY
-========================= */
+/* =========================================
+   MODAL BACKDROP
+========================================= */
 
-.contact-modal-overlay {
+.contact-modal-backdrop {
   position: fixed;
   inset: 0;
   z-index: 9999;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 20px;
-
-  background: rgba(10, 10, 10, 0.72);
-
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  overflow-y: auto;
+  background: rgba(16, 15, 14, 0.76);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-/* =========================
+/* =========================================
    MODAL
-========================= */
+========================================= */
 
 .contact-modal {
   position: relative;
-
   width: 100%;
-  max-width: 520px;
-  max-height: calc(100vh - 40px);
-
-  padding: 46px;
-
+  max-width: 530px;
+  max-height: calc(100dvh - 40px);
+  padding: 35px 40px 38px;
   overflow-y: auto;
-
+  border: 1px solid var(--border);
   background: var(--off-white);
   color: var(--text);
-
-  border: 1px solid var(--border);
-
-  box-shadow:
-    0 40px 100px rgba(0, 0, 0, 0.35);
-
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.28);
   scrollbar-width: thin;
 }
 
-.contact-close-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-
+.contact-modal-top {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-light);
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
 
-  width: 36px;
-  height: 36px;
-
+.contact-modal-close {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  place-items: center;
   border: 1px solid var(--border);
   border-radius: 50%;
-
   background: transparent;
   color: var(--text);
-
-  font-size: 20px;
-  font-weight: 300;
-
+  font-size: 22px;
   cursor: pointer;
-
   transition:
-    background 0.3s ease,
-    color 0.3s ease,
-    transform 0.3s ease;
-
-  &:hover {
-    background: var(--text);
-    color: var(--white);
-    transform: rotate(90deg);
-  }
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
-/* =========================
-   MODAL HEADER
-========================= */
-
-.modal-header {
-  padding-right: 35px;
-  margin-bottom: 38px;
-
-  > span {
-    display: block;
-    margin-bottom: 20px;
-
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--red);
-  }
-
-  h3 {
-    margin: 0 0 14px;
-
-    font-family: "Cormorant Garamond", serif;
-    font-size: 48px;
-    font-weight: 600;
-    line-height: 0.9;
-    letter-spacing: -0.04em;
-
-    em {
-      color: var(--red);
-      font-weight: 300;
-      font-style: italic;
-    }
-  }
-
-  p {
-    max-width: 360px;
-    margin: 0;
-
-    font-size: 12px;
-    line-height: 1.7;
-    color: var(--text-secondary);
-  }
+.contact-modal-close:hover:not(:disabled) {
+  transform: rotate(90deg);
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--white);
 }
 
-/* =========================
+.contact-modal-close:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   MODAL HEADING
+========================================= */
+
+.contact-modal-heading {
+  margin: 29px 0 31px;
+}
+
+.contact-modal-heading h3 {
+  margin: 0;
+  color: var(--text);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.contact-modal-heading h3 em {
+  color: var(--red);
+  font-weight: 500;
+}
+
+.contact-modal-heading p {
+  max-width: 365px;
+  margin: 16px 0 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* =========================================
    FORM
-========================= */
+========================================= */
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 24px;
 }
 
-.form-field {
+.contact-form-field {
   display: flex;
   flex-direction: column;
   gap: 9px;
-
-  label {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    color: var(--text-light);
-  }
-
-  input,
-  textarea {
-    width: 100%;
-
-    padding: 13px 0;
-
-    border: none;
-    border-bottom: 1px solid var(--border);
-
-    outline: none;
-
-    background: transparent;
-    color: var(--text);
-
-    font-family: inherit;
-    font-size: 14px;
-
-    transition:
-      border-color 0.3s ease,
-      padding 0.3s ease;
-
-    &::placeholder {
-      color: #b7b3ab;
-    }
-
-    &:focus {
-      border-color: var(--text);
-      padding-left: 5px;
-    }
-  }
-
-  textarea {
-    min-height: 100px;
-    resize: vertical;
-  }
 }
 
-/* =========================
-   SUBMIT
-========================= */
+.contact-form-field label {
+  color: var(--text-secondary);
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
-.form-submit {
+.contact-form-field input,
+.contact-form-field textarea {
+  width: 100%;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.7;
+  transition: border-color 0.25s ease;
+}
+
+.contact-form-field input::placeholder,
+.contact-form-field textarea::placeholder {
+  color: var(--text-light);
+}
+
+.contact-form-field input:focus,
+.contact-form-field textarea:focus {
+  border-color: var(--red);
+}
+
+.contact-form-field textarea {
+  min-height: 105px;
+  resize: vertical;
+}
+
+.contact-form-field input:focus-visible,
+.contact-form-field textarea:focus-visible {
+  outline: none;
+}
+
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
+
+.contact-form-submit {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  gap: 20px;
   width: 100%;
-  margin-top: 8px;
-  padding: 16px 20px;
-
-  border: none;
-
+  margin-top: 3px;
+  padding: 17px 19px;
+  border: 1px solid var(--text);
   background: var(--text);
   color: var(--white);
-
+  font-family: "DM Mono", monospace;
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-
   cursor: pointer;
-
   transition:
-    background 0.3s ease,
-    transform 0.3s ease;
-
-  &:hover {
-    background: var(--red);
-    transform: translateY(-2px);
-  }
-
-  &:disabled {
-    opacity: 0.55;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  span:last-child {
-    font-size: 18px;
-  }
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 
-/* =========================
-   STATUS
-========================= */
+.contact-form-submit:hover:not(:disabled) {
+  border-color: var(--red);
+  background: var(--red);
+}
 
-.status-msg {
-  margin: 0;
-  text-align: center;
+.contact-form-submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
 
+.contact-form-submit span:last-child {
+  font-size: 18px;
+}
+
+/* =========================================
+   FORM STATUS
+========================================= */
+
+.contact-form-status {
+  margin: -5px 0 0;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
   font-size: 11px;
-  letter-spacing: 0.04em;
-
-  &.success {
-    color: #3d8b5f;
-  }
-
-  &.error {
-    color: var(--red);
-  }
+  line-height: 1.7;
 }
 
-/* =========================
-   TABLET
-========================= */
+.contact-form-status.success {
+  border-color: rgba(61, 139, 95, 0.3);
+  color: #31764c;
+}
 
-@media (max-width: 1000px) {
-  .contact-wrap {
-    padding: 100px 44px 30px;
+.contact-form-status.error {
+  border-color: rgba(192, 57, 43, 0.25);
+  color: var(--red);
+}
+
+/* =========================================
+   FOCUS STATES
+========================================= */
+
+.contact-section button:focus-visible,
+.contact-section a:focus-visible,
+.contact-modal button:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 4px;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1050px) {
+  .contact-section {
+    padding: 85px 40px 25px;
   }
 
-  .contact-grid {
-    gap: 60px;
+  .contact-layout {
+    grid-template-columns: 1fr 0.9fr;
+    gap: 55px;
+    padding: 80px 0;
   }
 
   .contact-title {
-    font-size: clamp(54px, 7vw, 78px);
+    font-size: clamp(62px, 7.5vw, 82px);
   }
 
-  .contact-info-value {
+  .contact-detail-value {
     font-size: 19px;
   }
 }
 
-/* =========================
+/* =========================================
    MOBILE
-========================= */
+========================================= */
 
-@media (max-width: 768px) {
-  .contact-wrap {
-    padding: 90px 24px 28px;
+@media (max-width: 760px) {
+  .contact-section {
+    padding: 70px 25px 24px;
   }
 
-  .contact-grid {
+  .contact-layout {
     grid-template-columns: 1fr;
-    gap: 65px;
+    gap: 62px;
+    padding: 65px 0 70px;
   }
 
   .contact-title {
-    font-size: clamp(54px, 15vw, 76px);
+    font-size: clamp(60px, 12vw, 82px);
   }
 
-  .contact-desc {
-    max-width: 100%;
+  .contact-description {
+    max-width: 540px;
   }
 
-  .contact-right {
-    width: 100%;
+  .contact-details {
+    max-width: 600px;
   }
 
-  .contact-footer-line {
-    margin-top: 70px;
-    flex-direction: column;
+  .contact-bottom-line {
     align-items: flex-start;
-    gap: 10px;
+    flex-direction: column;
+    gap: 11px;
   }
 
-  .contact-bg-text {
-    right: -20px;
-    bottom: 80px;
-    font-size: 45vw;
+  .contact-section::before {
+    top: 180px;
+    right: -260px;
   }
 
-  .contact-modal {
-    padding: 36px 25px;
-  }
-
-  .modal-header h3 {
-    font-size: 42px;
+  .contact-section::after {
+    top: 220px;
+    right: -220px;
   }
 }
 
-/* =========================
+/* =========================================
    SMALL MOBILE
-========================= */
+========================================= */
 
 @media (max-width: 480px) {
-  .contact-wrap {
-    padding: 75px 20px 24px;
+  .contact-section {
+    padding: 55px 18px 22px;
   }
 
-  .contact-eyebrow {
-    margin-bottom: 28px;
+  .contact-section-top {
+    align-items: flex-start;
+  }
+
+  .contact-section-label {
+    font-size: 9px;
+  }
+
+  .contact-top-note {
+    max-width: 135px;
+    font-size: 7px;
+    line-height: 1.7;
+    text-align: right;
+  }
+
+  .contact-layout {
+    gap: 48px;
+    padding: 52px 0 55px;
   }
 
   .contact-title {
-    font-size: 52px;
+    font-size: clamp(51px, 12.5vw, 65px);
+  }
+
+  .contact-description {
+    font-size: 12px;
+  }
+
+  .contact-primary-button {
+    padding: 15px;
+    font-size: 9px;
   }
 
   .contact-availability {
-    font-size: 8px;
+    align-items: flex-start;
+    font-size: 9px;
   }
 
-  .contact-info-item {
-    grid-template-columns: 25px 1fr 20px;
+  .contact-detail-row {
+    grid-template-columns: 22px minmax(0, 1fr) 16px;
     gap: 10px;
     min-height: 82px;
   }
 
-  .contact-info-value {
-    font-size: 17px;
+  .contact-detail-value {
+    font-size: 19px;
   }
 
-  .contact-modal-overlay {
+  .contact-modal-backdrop {
+    align-items: center;
     padding: 12px;
   }
 
   .contact-modal {
-    max-height: calc(100vh - 24px);
-    padding: 32px 22px;
+    max-height: calc(100dvh - 24px);
+    padding: 25px 22px;
   }
 
-  .modal-header {
-    margin-bottom: 30px;
+  .contact-modal-heading {
+    margin: 25px 0;
   }
 
-  .modal-header h3 {
-    font-size: 38px;
+  .contact-modal-heading h3 {
+    font-size: 43px;
+  }
+
+  .contact-form {
+    gap: 21px;
   }
 }
 
-/* =========================
+/* =========================================
    REDUCED MOTION
-========================= */
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .contact-info-item,
-  .contact-info-arrow,
-  .contact-info-value,
-  .contact-cta,
-  .contact-close-btn,
-  .form-submit {
-    transition: none;
+  .contact-section *,
+  .contact-section *::before,
+  .contact-section *::after,
+  .contact-modal *,
+  .contact-modal *::before,
+  .contact-modal *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
